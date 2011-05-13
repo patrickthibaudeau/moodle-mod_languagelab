@@ -442,7 +442,7 @@ function languagelab_pluginfile($course, $cm, $context, $filearea, $args, $force
         if ($languagelab->legacyfiles != RESOURCELIB_LEGACYFILES_ACTIVE) {
             return false;
         }
-        if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_page', 'content', 0)) {
+        if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_languagelab', 'content', 0)) {
             return false;
         }
         //file migrate - update flag
