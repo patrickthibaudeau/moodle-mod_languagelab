@@ -74,13 +74,14 @@ $writer->startElement('params');
         $writer->startElement('course');
             $writer->writeAttribute('id', $course->id);
             $writer->writeAttribute('name', $course->fullname);
-            foreach ($coursemodules as $coursemodule){
+            //foreach should only be used in the block to view all course LL activities
+            //foreach ($coursemodules as $coursemodule){
                 $writer->startElement('activity');
-                    $writer->writeAttribute('id', $coursemodule->instance);
-                    $writer->writeAttribute('name', $coursemodule->name);
+                    $writer->writeAttribute('id', $cm->instance);
+                    $writer->writeAttribute('name', $cm->name);
                     $writer->writeAttribute('group', 0);
                 $writer->endElement(); //activity
-            }
+            //}
         $writer->endElement(); //Course
     $writer->endElement(); //courses
     $writer->startElement('students');

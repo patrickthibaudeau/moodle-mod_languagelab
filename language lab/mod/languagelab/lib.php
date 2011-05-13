@@ -402,7 +402,7 @@ function languagelab_scale_used ($languagelabid,$scaleid) {
 function languagelab_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('languagelab', 'grade', -$scaleid)) {
+    if ($scaleid and $DB->record_exists('languagelab', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;

@@ -18,7 +18,7 @@ $settings->add(new admin_setting_configtext('languagelab_prefix', get_string('pr
 $settings->add(new admin_setting_configtext('languagelab_xssAddress', get_string('xssAddress', 'languagelab'),
                    get_string('xssAddresshelp', 'languagelab'), get_string('xssAddress_name','languagelab'), PARAM_RAW));
 $settings->add(new admin_setting_configtext('languagelab_xssPort', get_string('xssPort', 'languagelab'),
-                   get_string('xssPorthelp', 'languagelab'), '4065', PARAM_INT));
+                   get_string('xssPorthelp', 'languagelab'), '2468', PARAM_INT));
 $settings->add(new admin_setting_configtext('languagelab_max_users', get_string('maxusers', 'languagelab'),
                    get_string('maxusershelp', 'languagelab'), '25', PARAM_INT));
 $settings->add(new admin_setting_configcheckbox('languagelab_stealthMode', get_string('stealthmode', 'languagelab'),

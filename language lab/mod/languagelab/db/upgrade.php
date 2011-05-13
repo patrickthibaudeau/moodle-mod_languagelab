@@ -69,9 +69,22 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011041901, 'languagelab');
     }
+    if ($oldversion < 2011050900) {
+
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011050900, 'languagelab');
+    }
+
+    if ($oldversion < 2011051100) {
+
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011051100, 'languagelab');
+    }
    
 
- return $result;
+ return;
 
 }
 
