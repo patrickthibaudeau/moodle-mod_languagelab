@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playerParam>
+  <localization>
+    <XMLLoadFail>
+      <![CDATA[XML couldn't be loaded. Contact your webmaster.]]>
+    </XMLLoadFail>
+    <warningLossOfWork>
+      <![CDATA[You are attempting to navigate away from a recording on which you made submitable changes. Are you sure you want to discard your changes?]]>
+    </warningLossOfWork>
+    <prerequisitesNotMet>
+      <![CDATA[Target server unspecified. Contact your webmaster.]]>
+    </prerequisitesNotMet>
+    <newRecording>
+      <![CDATA[New recording]]>
+    </newRecording>
+    <newReply>
+      <![CDATA[Teacher reply]]>
+    </newReply>
+    <timesOut>
+      <![CDATA[Time is up]]>
+    </timesOut>
+    <subject>
+      <![CDATA[Recording]]>
+    </subject>
+    <submitBlank>
+      <![CDATA[Submit]]>
+    </submitBlank>
+    <submitNew>
+      <![CDATA[Submit recording]]>
+    </submitNew>
+    <submitChanges>
+      <![CDATA[Submit changes]]>
+    </submitChanges>
+    <message>
+      <![CDATA[You may type a message here.]]>
+    </message>
+    <btnDiscard>
+      <![CDATA[Discard changes]]>
+    </btnDiscard>
+    <btnCancel>
+      <![CDATA[Cancel]]>
+    </btnCancel>
+    <submitGrade>
+      <![CDATA[Submit grade.]]>
+    </submitGrade>
+    <agoBefore>
+      <![CDATA[]]>
+    </agoBefore>
+    <agoAfter>
+      <![CDATA[ago]]>
+    </agoAfter>
+    <days>
+      <![CDATA[days]]>
+    </days>
+    <hours>
+      <![CDATA[hours]]>
+    </hours>
+    <minutes>
+      <![CDATA[minutes]]>
+    </minutes>
+    <seconds>
+      <![CDATA[seconds]]>
+    </seconds>
+    <grading>
+      <![CDATA[Grading]]>
+    </grading>
+    <grade>
+      <![CDATA[Grade]]>
+    </grade>
+    <startOver>
+      <![CDATA[Require student to start over]]>
+    </startOver>
+    <corrNotes>
+      <![CDATA[Enter correction notes here]]>
+    </corrNotes>
+    <monday>
+      <![CDATA[Mon]]>
+    </monday>
+    <tuesday>
+      <![CDATA[Tues]]>
+    </tuesday>
+    <wednesday>
+      <![CDATA[Wed]]>
+    </wednesday>
+    <thursday>
+      <![CDATA[Thur]]>
+    </thursday>
+    <friday>
+      <![CDATA[Fri]]>
+    </friday>
+    <saturday>
+      <![CDATA[Sat]]>
+    </saturday>
+    <sunday>
+      <![CDATA[Sun]]>
+    </sunday>
+    <january>
+      <![CDATA[Jan]]>
+    </january>
+    <february>
+      <![CDATA[Feb]]>
+    </february>
+    <march>
+      <![CDATA[Mar]]>
+    </march>
+    <april>
+      <![CDATA[Apr]]>
+    </april>
+    <may>
+      <![CDATA[May]]>
+    </may>
+    <june>
+      <![CDATA[Jun]]>
+    </june>
+    <july>
+      <![CDATA[Jul]]>
+    </july>
+    <august>
+      <![CDATA[Aug]]>
+    </august>
+    <september>
+      <![CDATA[Sept]]>
+    </september>
+    <october>
+      <![CDATA[Oct]]>
+    </october>
+    <november>
+      <![CDATA[Nov]]>
+    </november>
+    <december>
+      <![CDATA[Dec]]>
+    </december>
+  </localization>
+  <basicParam>
+    <envVar targetServer="rtmp://www.csj.ualberta.ca/oflaDemo" targetPost="./teacherview.controller.php" languageLabId="12" courseModuleId="38" xssAddress="xmlsocket.csj.ualberta.ca" xssPort="80" courseName="Test course 101" activityName="Moodle moot 2011" useGradeBook=""/>
+    <permissions bCanRecordNewStreams="0" bCanReply="1" bMultipleRecordings="0" bAutoSubmit="0" recording_timelimit="0" grade=""/>
+    <recordParam targetRecording="mdl_dev_patrick_12_2_1308023917" author="Admin User" authorId="2" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" videoMode="1"/>
+    <teacherParam bTeach="1" bEvaluated=""/>
+  </basicParam>
+  <previousRecordings>
+    <student label="Benton Barber" studentId="230" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_230_1304546363" lastUpdate="1304546511" label="bonjour" author="Benton Barber" userid="230" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Il est possible d envoyer un fichier vide" recordingid="38" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_230_1305905503" lastUpdate="1305907427" label="Recording 2" author="Benton Barber" userid="230" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="80" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_230_1305907427" lastUpdate="1305907443" label="question 3" author="Benton Barber" userid="230" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="81" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_230_1305907443" lastUpdate="1305907451" label="question 3" author="Benton Barber" userid="230" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="82" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_230_1305907451" lastUpdate="1305907600" label="best version" author="Benton Barber" userid="230" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="83" grade="" corrNotes=""/>
+    </student>
+    <student label="Benvolio Dinlickie" studentId="231" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_231_1304546404" lastUpdate="1304546588" label="bonjour" author="Benvolio Dinlickie" userid="231" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="What does this mean?" recordingid="47" grade="" corrNotes="">
+        <reply recURI="mdl_dev_patrick_12_4_1304546701" lastUpdate="1304546751" label="RE: bonjour" author="Admin User" userid="2" portrait="&lt;img src=&quot;http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189&quot; alt=&quot;Picture of Admin User&quot; title=&quot;Picture of Admin User&quot; class=&quot;userpicture defaultuserpic&quot; width=&quot;35&quot; height=&quot;35&quot; /&gt;" tMessage="Good job" recordingid="65"/>
+      </recording>
+      <recording recURI="mdl_dev_patrick_12_231_1304546588" lastUpdate="1304546589" label="bonjour" author="Benvolio Dinlickie" userid="231" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="What does this mean?" recordingid="48" grade="" corrNotes=""/>
+    </student>
+    <student label="Bernie Dinos" studentId="243" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_243_1304546305" lastUpdate="1304546359" label="Recording 2" author="Bernie Dinos" userid="243" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="25" grade="" corrNotes="">
+        <reply recURI="mdl_dev_patrick_12_2_1308023537" lastUpdate="1308023556" label="RE: Recording 2" author="Admin User" userid="2" portrait="&lt;img src=&quot;http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189&quot; alt=&quot;Picture of Admin User&quot; title=&quot;Picture of Admin User&quot; class=&quot;userpicture defaultuserpic&quot; width=&quot;35&quot; height=&quot;35&quot; /&gt;" tMessage="sdfsdfsdf" recordingid="105"/>
+      </recording>
+      <recording recURI="mdl_dev_patrick_12_243_1304546359" lastUpdate="1304546397" label="Hello, World!" author="Bernie Dinos" userid="243" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="29" grade="" corrNotes=""/>
+    </student>
+    <student label="John Doe" studentId="3" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_3_1304953901" lastUpdate="1304953951" label="This is cool" author="John Doe" userid="3" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/24/user/icon/f2" tMessage="asasd" recordingid="77" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_3_1304953951" lastUpdate="1304953993" label="Resdf" author="John Doe" userid="3" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/24/user/icon/f2" tMessage="" recordingid="78" grade="" corrNotes=""/>
+    </student>
+    <student label="Bentley Downs" studentId="229" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_229_1304546313" lastUpdate="1304546586" label="Randah_Bonjour" author="Bentley Downs" userid="229" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="This is me saying bonjour!" recordingid="45" grade="" corrNotes=""/>
+    </student>
+    <student label="Berk Enstock" studentId="238" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_238_1304546307" lastUpdate="1304546607" label="my recording" author="Berk Enstock" userid="238" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="This is my recording." recordingid="58" grade="" corrNotes=""/>
+    </student>
+    <student label="Beriszl Forcier" studentId="237" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_237_1304546320" lastUpdate="1304546590" label="Recording Title" author="Beriszl Forcier" userid="237" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Recording Contents" recordingid="50" grade="" corrNotes=""/>
+    </student>
+    <student label="Bersh Hall" studentId="247" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_247_1304547443" lastUpdate="1304547465" label="Recording 2" author="Bersh Hall" userid="247" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="73" grade="" corrNotes=""/>
+    </student>
+    <student label="Berg Ice" studentId="233" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_233_1304546313" lastUpdate="1304546601" label="bonjour" author="Berg Ice" userid="233" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="on s'amuse :)" recordingid="56" grade="" corrNotes=""/>
+    </student>
+    <student label="Bergen Johns" studentId="234" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_234_1304546590" lastUpdate="1304546601" label="Recording 2" author="Bergen Johns" userid="234" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="bonjour" recordingid="55" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_234_1304546331" lastUpdate="1304546590" label="Recording 2" author="Bergen Johns" userid="234" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="bonjour" recordingid="51" grade="" corrNotes=""/>
+    </student>
+    <student label="Billy Bob Johnson" studentId="5" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_5_1304546189" lastUpdate="1304546202" label="Recording 2" author="Billy Bob Johnson" userid="5" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/f2" tMessage="" recordingid="20" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_5_1304546202" lastUpdate="1304546353" label="Recording 3" author="Billy Bob Johnson" userid="5" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/f2" tMessage="" recordingid="23" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_5_1304546353" lastUpdate="1304546489" label="Testing " author="Billy Bob Johnson" userid="5" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/f2" tMessage="This is awesome!" recordingid="34" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_5_1304546489" lastUpdate="1304546538" label="Testing 1, 2, 3" author="Billy Bob Johnson" userid="5" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/f2" tMessage="This is awesome!" recordingid="40" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_5_1304546538" lastUpdate="1304546556" label="Testing 1, 2, 3" author="Billy Bob Johnson" userid="5" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/f2" tMessage="This is awesome!" recordingid="42" grade="" corrNotes=""/>
+    </student>
+    <student label="Bernardo Nintuk" studentId="242" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_242_1304546536" lastUpdate="1304546616" label="Recording 2" author="Bernardo Nintuk" userid="242" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="60" grade="" corrNotes=""/>
+    </student>
+    <student label="Bert Oats" studentId="248" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_248_1304546381" lastUpdate="1304546421" label="Recording 2" author="Bert Oats" userid="248" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="30" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_248_1304546422" lastUpdate="1304546461" label="Recording 2" author="Bert Oats" userid="248" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="fsdf" recordingid="31" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_248_1304546462" lastUpdate="1304546494" label="Recording 2" author="Bert Oats" userid="248" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="36" grade="" corrNotes=""/>
+    </student>
+    <student label="Berger Parler" studentId="235" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_235_1304546324" lastUpdate="1304546590" label="Bonjour" author="Berger Parler" userid="235" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Salut Monsieur!" recordingid="52" grade="" corrNotes=""/>
+    </student>
+    <student label="Berny Patrick" studentId="244" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_244_1304546311" lastUpdate="1304546486" label="Recording 2" author="Berny Patrick" userid="244" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="My first recording" recordingid="33" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_244_1304546814" lastUpdate="1304546837" label="Recording 3" author="Berny Patrick" userid="244" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="68" grade="" corrNotes=""/>
+    </student>
+    <student label="Berenger Patritov" studentId="232" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_232_1304546318" lastUpdate="1304546587" label="Bonjour" author="Berenger Patritov" userid="232" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/301/user/icon/f2" tMessage="This is me saying &quot;Bonjour!&quot;" recordingid="46" grade="" corrNotes=""/>
+    </student>
+    <student label="Bernard Shaw" studentId="241" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_241_1304546307" lastUpdate="1304546659" label="Recording 2" author="Bernard Shaw" userid="241" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="63" grade="" corrNotes=""/>
+    </student>
+    <student label="Benny Smith" studentId="227" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_227_1304546317" lastUpdate="1304546590" label="Bonjour" author="Benny Smith" userid="227" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/296/user/icon/f2" tMessage="" recordingid="53" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_227_1305905619" lastUpdate="1305905753" label="Recording 2" author="Benny Smith" userid="227" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/296/user/icon/f2" tMessage="" recordingid="79" grade="" corrNotes=""/>
+    </student>
+    <student label="Berowne Smyth" studentId="245" grade="" gradeid=""/>
+    <student label="Bergren Steinki" studentId="236" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_236_1304546275" lastUpdate="1304546316" label="Recording 2" author="Bergren Steinki" userid="236" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="22" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_236_1304546396" lastUpdate="1304546492" label="salut" author="Bergren Steinki" userid="236" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Je vais dire salut, monsieur le professeur, sans accent." recordingid="35" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_236_1304546493" lastUpdate="1304546598" label="salut" author="Bergren Steinki" userid="236" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Je vais dire salut, monsieur le professeur, sans accent." recordingid="54" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_236_1304546598" lastUpdate="1304546620" label="salut" author="Bergren Steinki" userid="236" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="Je vais dire salut, monsieur le professeur, sans accent." recordingid="61" grade="" corrNotes=""/>
+    </student>
+    <student label="Benson Tremblay" studentId="228" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_228_1304546314" lastUpdate="1304546590" label="Bonjour" author="Benson Tremblay" userid="228" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="J'ai dit bonjour." recordingid="49" grade="" corrNotes=""/>
+    </student>
+    <student label="Berkly Trudelle" studentId="240" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_240_1304546324" lastUpdate="1304546606" label="bonjour" author="Berkly Trudelle" userid="240" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="57" grade="" corrNotes=""/>
+    </student>
+    <student label="Berthold Tutu" studentId="249" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_249_1304546333" lastUpdate="1304546476" label="Recording 2" author="Berthold Tutu" userid="249" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="32" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_249_1304546476" lastUpdate="1304546574" label="Recording 2" author="Berthold Tutu" userid="249" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="44" grade="" corrNotes=""/>
+    </student>
+    <student label="Berrigan Tyler" studentId="246" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_246_1304546704" lastUpdate="1304546759" label="Recording 2" author="Berrigan Tyler" userid="246" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="66" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_246_1304546791" lastUpdate="1304546815" label="fle" author="Berrigan Tyler" userid="246" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="67" grade="" corrNotes=""/>
+      <recording recURI="mdl_dev_patrick_12_246_1304546816" lastUpdate="1304546847" label="fle" author="Berrigan Tyler" userid="246" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="69" grade="" corrNotes=""/>
+    </student>
+    <student label="Berkeley Univer" studentId="239" grade="" gradeid="">
+      <recording recURI="mdl_dev_patrick_12_239_1304546354" lastUpdate="1304546552" label="bonjour" author="Berkeley Univer" userid="239" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=formal_white&amp;amp;image=u%2Ff2&amp;amp;rev=189" tMessage="" recordingid="41" grade="" corrNotes=""/>
+    </student>
+  </previousRecordings>
+</playerParam>

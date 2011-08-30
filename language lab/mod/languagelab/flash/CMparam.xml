@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<params>
+ <config>
+ <!-- stealthMode has been added to the env variables -->
+  <env streamingServer="129.128.136.21" teacherStream="mdl_dev_patrick_2_classmon_1297897823" stealthMode="1" socketServerIP="xmlsocket.csj.ualberta.ca" socketServerPort="80" userID="2" userPortrait="http://localhost/moodle/theme/image.php?theme=nonzero&amp;amp;image=u%2Ff2"/>
+  <localization/>
+ </config>
+ <courses>
+ <!-- The course node structure has changed to accomodate the new XSS Structure -->
+  <course id="1" name="Course 01">
+  	<activity id="1" name="Activity 01" group="0"/>
+		<student id="20">
+			<recording stream="teststream0001" />
+			<recording stream="teststream0002" />
+			<recording stream="teststream0003" />
+		</student>
+		<student id="21">
+			<recording stream="teststream0004" />
+			<recording stream="teststream0005" />
+			<recording stream="teststream0006" />
+		</student>
+  	<activity id="2" name="Activity 02" group="0"/>
+  </course>
+  <course id="2" name="Test">
+	<activity id="2" name="New language lab" group="0"/>
+  	<activity id="3" name="Activity 03" group="0"/>
+  	<activity id="4" name="Activity 04" group="0"/>
+  </course>
+ </courses>
+<!-- all details from all students registered goes here -->
+<students>
+	<student id="20" name="Melanie C. Carter" portrait="http://www.diversiteartistique.org/files/galleries/bo_huang/th_portrait_of_mr_edgar_fruitier.jpg"/>
+	<student id="21" name="Wilma S. Clifton" portrait="http://www.diversiteartistique.org/files/galleries/bo_huang/th_portrait_of_mr_edgar_fruitier.jpg"/>
+	<student id="10" name="Nicholas Sarkozy" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/10/f1.jpg"/>
+	<student id="8" name="Wen Jiabaom" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/8/f1.jpg"/>
+	<student id="4" name="John Doe" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/26/user/icon/f1"/>
+	<student id="7" name="Kevin Rudd" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/7/f1.jpg"/>
+	<student id="6" name="Heinz Fischer" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/6/f1.jpg"/>
+	<student id="9" name="Cristian Fernandez de Kirchner" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/9/f1.jpg"/>
+	<student id="5" name="Barack Obama" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/5/f1.jpg"/>
+</students>
+
+</params>
