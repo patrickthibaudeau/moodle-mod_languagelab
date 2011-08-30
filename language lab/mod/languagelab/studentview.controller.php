@@ -23,6 +23,7 @@ $label = optional_param("label",'', PARAM_TEXT);
 $message = optional_param("message",'',PARAM_TEXT);
 $count = optional_param("count",0,PARAM_INT);
 $id = optional_param("submission_id",0, PARAM_INT);
+$groupid = optional_param("groupid",0, PARAM_INT);
 
 
 echo "action=".$action."<br>";
@@ -40,9 +41,11 @@ if ($action == 'insert_record') {
 	$save_recording = new object(); {
 	$save_recording->languagelab = $languagelab;
 	$save_recording->userid = $userid;
+        $save_recording->groupid = $groupid;
 	$save_recording->path = $path;
 	$save_recording->label = $label;
 	$save_recording->message = $message;
+        $save_recording->parentnode = '';
 	$save_recording->timecreated = time();
 	$save_recording->timemodified = time();
 	

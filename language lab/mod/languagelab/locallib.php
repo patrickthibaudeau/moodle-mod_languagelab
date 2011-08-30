@@ -1,7 +1,8 @@
 <?php
-require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(dirname(dirname(__FILE__))).'/lib/filelib.php');
 
+require_once('../../config.php');
+global $CFG;
+require_once($CFG->dirroot . '/lib/filelib.php');
 
 
 //conversion for htmleditor

@@ -34,8 +34,8 @@ function languagelab_supports($feature) {
     switch($feature) {
         case FEATURE_IDNUMBER:                return false;
         case FEATURE_GROUPS:                  return true;
-        case FEATURE_GROUPINGS:               return false;
-        case FEATURE_GROUPMEMBERSONLY:        return false;
+        case FEATURE_GROUPINGS:               return true;
+        case FEATURE_GROUPMEMBERSONLY:        return true;
         case FEATURE_MOD_INTRO:               return false;
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return true;
@@ -56,16 +56,31 @@ function languagelab_supports($feature) {
  * @param object $instance An object from the form in mod.html
  * @return int The id of the newly inserted languagelab record
  **/
-function languagelab_add_instance($languagelab) {
+function languagelab_add_instance($languagelab, $mform=null) {
 	global $DB, $CFG;
 
     require_once("$CFG->libdir/resourcelib.php");
     
     $draftitemid = $languagelab->content['itemid'];
     $cmid = $languagelab->coursemodule;
+    $context = get_context_instance(CONTEXT_MODULE,$cmid);
+    //Remove once re-implemented
+    $languagelab->recording_timelimit = 0;
     $languagelab->contentformat = $languagelab->content['format'];
     $languagelab->description = $languagelab->content['text'];
     $languagelab->timemodified = time();
+    //Uploaded file
+    if ($mform) {
+            $filename = $mform->get_new_filename('master_track');
+            if ($filename !== false) {
+                $scorm->reference = $filename;
+                $fs = get_file_storage();
+                $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
+                $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
+                $languagelab->master_track = $filename;
+
+            }
+        }
     
       
     $languagelab->id = $DB->insert_record("languagelab", $languagelab);
@@ -97,17 +112,28 @@ function languagelab_add_instance($languagelab) {
  * @param object $instance An object from the form in mod.html
  * @return boolean Success/Fail
  **/
-function languagelab_update_instance($languagelab) {
+function languagelab_update_instance($languagelab, $mform=null) {
 	global $CFG, $DB;
 
     $cmid = $languagelab->coursemodule;
+    $context = get_context_instance(CONTEXT_MODULE,$cmid);
     $draftitemid = $languagelab->content['itemid'];
     $languagelab->contentformat = $languagelab->content['format'];
     $languagelab->description = $languagelab->content['text'];
     $languagelab->timemodified = time();
     $languagelab->id = $languagelab->instance;
-    
-    
+    //Uploaded file
+    if ($mform) {
+            $filename = $mform->get_new_filename('master_track');            
+            if ($filename !== false) {
+                $scorm->reference = $filename;
+                $fs = get_file_storage();
+                $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
+                $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
+                $languagelab->master_track = $filename;
+
+            }
+        }
     # May have to add extra stuff in here #
     $temp = $DB->update_record("languagelab", $languagelab);
 
@@ -418,7 +444,7 @@ function get_languagelab_id($languagelab) {
 function languagelab_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload) {
     global $CFG, $DB;
     require_once("$CFG->libdir/resourcelib.php");
-
+    
     if ($context->contextlevel != CONTEXT_MODULE) {
         return false;
     }
@@ -426,43 +452,38 @@ function languagelab_pluginfile($course, $cm, $context, $filearea, $args, $force
     require_course_login($course, true, $cm);
     
 
-    if ($filearea !== 'content') {
-        // intro is handled automatically in pluginfile.php
+    if ($filearea == 'content') {
+
+        //Get languagelab-> id from file_rewrite_pluginfile_urls ***IMPORTANT** Otherwisefiles won't display!!!!
+        $languagelabid = (int)array_shift($args);
+
+        $fs = get_file_storage();
+        $relativepath = implode('/', $args);
+        $fullpath = "/$context->id/mod_languagelab/$filearea/$languagelabid/$relativepath";
+        if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
+            $languagelab = $DB->get_record('languagelab', array('id'=>$cm->instance), 'id, legacyfiles', MUST_EXIST);
+            if ($languagelab->legacyfiles != RESOURCELIB_LEGACYFILES_ACTIVE) {
+                return false;
+            }
+            if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_languagelab', 'content', 0)) {
+                return false;
+            }
+            //file migrate - update flag
+            $languagelab->legacyfileslast = time();
+            $DB->update_record('languagelab', $languagelab);
+        }
+    } else {
+        $fs = get_file_storage();
+        $relativepath = implode('/', $args);
+        $fullpath = "/$context->id/mod_languagelab/mastertrack/$relativepath";
+        echo "<br>$fullpath";
+        if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
         return false;
-    }
-
-    //Get languagelab-> id from file_rewrite_pluginfile_urls ***IMPORTANT** Otherwisefiles won't display!!!!
-    $languagelabid = (int)array_shift($args);
-
-    $fs = get_file_storage();
-    $relativepath = implode('/', $args);
-    $fullpath = "/$context->id/mod_languagelab/$filearea/$languagelabid/$relativepath";
-    if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
-        $languagelab = $DB->get_record('languagelab', array('id'=>$cm->instance), 'id, legacyfiles', MUST_EXIST);
-        if ($languagelab->legacyfiles != RESOURCELIB_LEGACYFILES_ACTIVE) {
-            return false;
         }
-        if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_languagelab', 'content', 0)) {
-            return false;
-        }
-        //file migrate - update flag
-        $languagelab->legacyfileslast = time();
-        $DB->update_record('languagelab', $languagelab);
     }
-
     // finally send the file
     send_stored_file($file, 86400, 0, $forcedownload);
 }
-/**
- * Execute post-uninstall custom actions for the module
- * This function was added in 1.9
- *
- * @return boolean true if success, false on error
- */
-function languagelab_uninstall() {
-    return true;
-}
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 /// Any other languagelab functions go here.  Each of them must have a name that 

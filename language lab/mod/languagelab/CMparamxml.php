@@ -80,6 +80,22 @@ $writer->startElement('params');
                     $writer->writeAttribute('id', $cm->instance);
                     $writer->writeAttribute('name', $cm->name);
                     $writer->writeAttribute('group', 0);
+                        
+                    //get all student recordings for this lab
+                    foreach ($students as $student){
+                        $writer->startElement('student');
+                        $writer->writeAttribute('id', $student->id);
+                            //get this students recordings
+                            $student_recordings = $DB->get_records('languagelab_submissions', array('userid' => $student->id,'languagelab' => $languagelab->id));
+                            foreach ($student_recordings as $sr) {
+                                $writer->startElement('recording');
+                                    $writer->writeAttribute('stream', $sr->path);
+                                $writer->endElement(); //end recording
+                            }
+
+                        $writer->endElement(); // end student
+
+                    }
                 $writer->endElement(); //activity
             //}
         $writer->endElement(); //Course

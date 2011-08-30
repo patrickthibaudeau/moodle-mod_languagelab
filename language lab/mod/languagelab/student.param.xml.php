@@ -3,7 +3,7 @@ session_cache_limiter('nocahce'); //Needed for XML to load with IE
 //header("Cache-Control: no-cache"); //Prevent caching issues with MSIE
 require_once("../../config.php");
 require_once("lib.php");
-include('../lib/gdlib.php');
+//include('../lib/gdlib.php');
 
 //We need to determine if activity is available for the times chosen by teacher
 
@@ -11,7 +11,7 @@ include('../lib/gdlib.php');
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or
 $l  = optional_param('l', 0, PARAM_INT);  // languagelab ID
 
-global $DB;
+global $CFG,$DB;
 
 if ($id) {
     $cm         = get_coursemodule_from_id('languagelab', $id, 0, false, MUST_EXIST);
@@ -49,11 +49,20 @@ $now =time();
 $available = $languagelab_params->timeavailable < $now && ($now < $languagelab_params->timedue || !$languagelab_params->timedue);
 //************************End language activity params******************************
 
+//************************Get master track*******************************
+if (isset($languagelab->master_track)){
+$mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+} else {
+    $mastertrack = '';
+}
+//************************End Get master track*******************************
+
 //****************Get students recording*************************************
 $recordings = $DB->get_records('languagelab_submissions',array('userid' => $studentid, 'languagelab' => $languagelab->id));
 //**************************************************************************
 
-
+//Get student grade
+$student_grade = $DB->get_record('languagelab_student_eval',array('userid' => $studentid, 'languagelab' => $languagelab->id));
 
 //*******************************number of evalutions submitted **************************************
 //Number of submissions is used to determine wether or not the user has submitted a recording
@@ -240,6 +249,8 @@ $writer->startElement('playerParam'); //playerParam start
             $writer->writeAttribute('xssPort',$CFG->languagelab_xssPort);
             $writer->writeAttribute('courseName',trim($course->fullname));
             $writer->writeAttribute('activityName',$languagelab->name);
+            $writer->writeAttribute('masterTrack',$mastertrack);
+
         $writer->endElement(); //end envVar
 
         $writer->startElement('permissions'); //start permissions
@@ -252,6 +263,11 @@ $writer->startElement('playerParam'); //playerParam start
 			$writer->writeAttribute('bMultipleRecordings',$attempts);
 			$writer->writeAttribute('bAutoSubmit','0');
 			$writer->writeAttribute('recording_timelimit',$languagelab_params->recording_timelimit);
+                        if (isset($student_grade->grade)){
+                            $writer->writeAttribute('grade',$student_grade->grade);
+                        } else {
+                            $writer->writeAttribute('grade','');
+                        }
 		$writer->endElement(); //end permissions
 
 		$writer->startElement('recordParam'); //start recordParma
@@ -260,6 +276,7 @@ $writer->startElement('playerParam'); //playerParam start
 			$writer->writeAttribute('authorId',$studentid);//Students ID number
 			$writer->writeAttribute('portrait',$studentpicture);
 			$writer->writeAttribute('count',$number_of_submissions);
+                        $writer->writeAttribute('videoMode', $languagelab->video);
 		$writer->endElement(); // End recordParam
 
 	$writer->endElement(); //End basicParam

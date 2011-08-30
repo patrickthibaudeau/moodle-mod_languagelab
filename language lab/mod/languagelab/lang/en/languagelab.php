@@ -17,6 +17,11 @@ $string['general'] = 'General';
 $string['attempts'] = 'One recording per student';
 $string['recording_timelimit'] = 'Recoding time limit in minutes. (0 = unlimited)';
 $string['attempts_warning'] = 'Note: Only one submission is allowed.<br>You can return and record over the previous submission. This will delete the previous recording.<br>Only the last submitted recording will be evaluated';
+$string['master_track'] = 'Master track (mp3 only)';
+$string['master_track_file'] = 'Master track currently used';
+$string['master_track_help'] = 'A master track is an mp3 file containing audio samples with blank spaces allowing students to
+                                record themselves during the blank spaces.<br>We had to integrate in this fashion because Flash does not
+                                allow pausing while recording.';
 $string['not_available'] = 'This activity expired. You can read/listen to your teachers notes. However, you will be unable to do any new recordings.';
 $string['no_due_date'] = 'No due date entered.';
 $string['no_available_date'] = 'No start date entered.';
@@ -87,11 +92,21 @@ $string['october'] = 'Oct';
 $string['november'] = 'Nov';
 $string['december'] = 'Dec';
 
+$string["advanced"] = 'Advanced settings';
+$string["attempts_help"] = 'Check this box if you want your students to record only to one file.';
+$string["async"] = 'Discussion (forum like)';
+$string["dialogue"] = 'Dialogue';
+$string["group_type"] = 'Group type';
+$string["group_type_help"] = '<b>Note: Only use this setting if you are using seperate groups or visible groups</b><br>
+                               <ul><li><i>Discussion:</i> Use this type if you would like your students to record asynchronously. A forum like thread will display the conversation</li>
+                               <li><i>Dialogue:</i> Use this type if you want your group of students to have a recorded conversation.</li></ul>';
 $string['maxusers'] = 'Maximum number of users.';
 $string['maxusershelp'] = 'Maximum number of users that can use the language lab simultaniously.';
 
 $string['languagelab:studentview'] = 'Language lab: Student view.';
 $string['languagelab:teacherview'] = 'Language lab: Teacher view.';
+$string['select_group_type'] = 'Select group type';
+
 
 $string['xssAddress'] = 'XML Socket Server Address';
 $string['xssAddresshelp'] = 'The IP address or fully qualified name of the XML Socket Server.';
@@ -102,6 +117,11 @@ $string['xssPorthelp'] = 'The port number used by XML Socket Server.';
 $string['classmonitor'] = 'Monitor your class';
 $string['stealthmode'] = 'Activate stealth mode?';
 $string['stealthmodehelp'] = 'When activated, students will not know that they are being monitored when the teacher uses the classroom monitor.';
+$string["use_video"] = 'Allow video.';
+$string["use_grade_book_help"] = 'By default, no grading will be given for language lab activities. That way you can create as many language activities
+                                   for exercise purposes, without filling up your gradebook. If you do want to grade this particular activity, check this box.';
+$string["video"] = 'Allowing video.';
+$string["video_help"] = 'Check this box if you would like your students to use video and audio while recording. This can be helpful, for example, for sign language.';
 
 //previously in languagelab block
 $string["ffmpeg"] = 'Path to ffmpeg executable.';
@@ -124,4 +144,5 @@ $string["localred5"] = 'Is your Red5 server hosted on the same server as moodle?
 $string["localred5help"] = 'If your Red5 Server installation is hosted on the same server as your Moodle server, check this box. If not leave blank and enter the FTP information';
 $string["red5path"] = 'Path to the Red5 server stream folder.';
 $string["red5pathhelp"] = 'Enter the path to the Red5 server stream folder.';
+
 ?>

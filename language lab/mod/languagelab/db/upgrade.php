@@ -82,7 +82,73 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011051100, 'languagelab');
     }
-   
+
+    if ($oldversion < 2011052600) {
+
+        // Define field video to be added to languagelab
+        $table = new xmldb_table('languagelab');
+        $field = new xmldb_field('video', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'attempts');
+
+        // Conditionally launch add field video
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011052600, 'languagelab');
+    }
+
+    if ($oldversion < 2011052601) {
+
+        // Define field group_type to be added to languagelab
+        $table = new xmldb_table('languagelab');
+        $field = new xmldb_field('group_type', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'use_grade_book');
+
+        // Conditionally launch add field group_type
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011052601, 'languagelab');
+    }
+
+    if ($oldversion < 2011080800) {
+
+        //Fixed undefined variables
+        //Fixed $available in view.php
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011080800, 'languagelab');
+    }
+        if ($oldversion < 2011082600) {
+
+        // Define field master_track to be added to languagelab
+        $table = new xmldb_table('languagelab');
+        $field = new xmldb_field('master_track', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'group_type');
+
+        // Conditionally launch add field master_track
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011082600, 'languagelab');
+    }
+    if ($oldversion < 2011082700) {
+
+        //Activated Master track feature
+        
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011082700, 'languagelab');
+    }
+	if ($oldversion < 2011082900) {
+
+        //Fixed backup_steps (missing fields)
+		//Updated LanguageLabCT.swf
+        
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011082900, 'languagelab');
+    }
 
  return;
 

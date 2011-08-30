@@ -51,6 +51,15 @@ $teacherpicture = str_replace('"', '', $teacherpicture);
 $students = get_enrolled_users($context,'mod/languagelab:studentview');
 
 //****************************End Student information
+
+//************************Get master track*******************************
+if (isset($languagelab->master_track)){
+$mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+} else {
+    $mastertrack = '';
+}
+//************************End Get master track*******************************
+
 //**********XML OUTPUT******************
 
 $writer = new XMLWriter();
@@ -213,7 +222,7 @@ $writer->startElement('playerParam');
 	$writer->endElement(); //End localization
 
 	$writer->startElement('basicParam');
-		$writer->startElement('envVar');
+	    $writer->startElement('envVar');
             $writer->writeAttribute('targetServer','rtmp://'.$CFG->languagelab_red5server.'/oflaDemo');
             $writer->writeAttribute('targetPost','./teacherview.controller.php');
             $writer->writeAttribute('languageLabId',$languagelab->id);
@@ -223,6 +232,7 @@ $writer->startElement('playerParam');
             $writer->writeAttribute('courseName',$course->fullname);
             $writer->writeAttribute('activityName',$languagelab->name);
             $writer->writeAttribute('useGradeBook',$languagelab->use_grade_book);
+            $writer->writeAttribute('masterTrack',$mastertrack);
         $writer->endElement(); //end envVar
 
         $writer->startElement('permissions');
@@ -238,7 +248,13 @@ $writer->startElement('playerParam');
 			$writer->writeAttribute('author',$teachername);//Teacher
 			$writer->writeAttribute('authorId',$teacherid);//Teacher
 			$writer->writeAttribute('portrait',$teacherpicture);
+                        $writer->writeAttribute('videoMode', $languagelab->video);
 		$writer->endElement(); // End recordParam
+
+                $writer->startElement('teacherParam');
+                    $writer->writeAttribute('bTeach', '1');
+                    $writer->writeAttribute('bEvaluated', $languagelab->use_grade_book);
+                $writer->endElement(); // End teacherParam
 
 	$writer->endElement(); //End basicParam
 
@@ -251,14 +267,21 @@ $writer->startElement('playerParam');
 				//***************Get the students grade******************************
 				$student_grade = $DB->get_record('languagelab_student_eval',array('userid' => $student->id,'languagelab' => $languagelab->id));
 				//*******************************************************************
-				$writer->startElement('student');
+	                        $writer->startElement('student');
 				$writer->writeAttribute('label',fullname($student));
 				$writer->writeAttribute('studentId',$student->id);
-				$writer->writeAttribute('grade',$student_grade->grade);
-				$writer->writeAttribute('correctionnotes',$student_grade->correctionnotes);
-				$writer->writeAttribute('gradeid',$student_grade->id); //languagelab_student_evalution->id
-				//Get student picture Because search_users function only gives fullname and email
-				  //We need to get the student record in order to more information on the user.
+                                if (isset($student_grade->grade)){
+                                    $writer->writeAttribute('grade',$student_grade->grade);
+                                } else {
+                                    $writer->writeAttribute('grade','');
+                                }
+                                if (isset($student_grade->id)){
+                                    $writer->writeAttribute('gradeid',$student_grade->id);//languagelab_student_evalution->id
+                                } else {
+                                    $writer->writeAttribute('gradeid','');
+                                }
+                                  //Get student picture Because search_users function only gives fullname and email
+				  //We need to get the student record in order to gather more information on the user.
 				  $studentinfo = $DB->get_record("user",array("id" => $student->id));
 				  $studentpictureurl = $OUTPUT->user_picture($studentinfo, array('courseid' => $course->id, 'link' => false));
                                   //create an array from the image tag
@@ -281,6 +304,16 @@ $writer->startElement('playerParam');
 							$writer->writeAttribute('portrait',$studentpicture);
 							$writer->writeAttribute('tMessage',$studentrecording->message);
 							$writer->writeAttribute('recordingid',$studentrecording->id);
+                                                        if (isset($student_grade->grade)){
+                                                            $writer->writeAttribute('grade',$student_grade->grade);
+                                                        } else {
+                                                            $writer->writeAttribute('grade','');
+                                                        }
+                                                        if (isset($student_grade->correctionnotes)){
+                                                            $writer->writeAttribute('corrNotes',$student_grade->correctionnotes);
+                                                        } else {
+                                                            $writer->writeAttribute('corrNotes','');
+                                                        }
 							
 							$parentnode = array("parentnode" => $studentrecording->path, "languagelab" => $languagelab->id);
 														

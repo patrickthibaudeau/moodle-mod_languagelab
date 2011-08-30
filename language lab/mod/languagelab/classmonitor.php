@@ -44,6 +44,7 @@ echo $OUTPUT->header();
 				<param name="play" value="true" />
 				<param name="loop" value="true" />
 				<param name="wmode" value="window" />
+                                <param name="allowFullScreen" value="true" />
 				<param name="scale" value="showall" />
 				<param name="menu" value="true" />
 				<param name="devicefont" value="false" />
@@ -58,6 +59,7 @@ echo $OUTPUT->header();
 					<param name="play" value="true" />
 					<param name="loop" value="true" />
 					<param name="wmode" value="window" />
+                                        <param name="allowFullScreen" value="true" />
 					<param name="scale" value="showall" />
 					<param name="menu" value="true" />
 					<param name="devicefont" value="false" />

@@ -1,4 +1,4 @@
-ï»¿<?php // $Id: tab.php,v 1.2 2008/07/01 09:44:05 moodler Exp $ 
+<?php // $Id: tab.php,v 1.2 2008/07/01 09:44:05 moodler Exp $ 
       // tab.php - created with Moodle 1.9
 
 $string['name'] = 'Nom';
@@ -6,41 +6,41 @@ $string['modulename'] = 'Lab de langue';
 $string['modulenameplural'] = 'Lab de langues';
 $string['red5server'] = 'URL de votre serveur Red5';
 $string['red5config'] = 'Entrez l\'adresse IP ou le URL (FQDN) de votre serveur Red5. Localhost ne fonctionneras pas!';
-$string['name'] = 'Nom de l\'activitÃ©';
+$string['name'] = 'Nom de l\'activité';
 $string['description'] = 'Description';
 $string['availabledate'] = 'Disponible de: ';
-$string['duedate'] = 'Date d\'Ã©chiance: ';
-$string['general'] = 'GÃ©nÃ©ral';
-$string['attempts'] = 'Un enregistrement par Ã©tudinat!';
-$string['recording_timelimit'] = 'Le temps d\'enregistrement en minutes. (0 = illimitÃ©)';
-$string['not_available'] = 'Cette activitÃ© est terminÃ©.Vous pouvez visionner les commentaires de votre enseignant. Vous ne pouvez pas faire de nouveau enregistrement.';
-$string['no_due_date'] = 'Aucune dates d\'Ã©chÃ©ances entrÃ©.';
-$string['no_available_date'] = 'Aucune date entrÃ©.';
+$string['duedate'] = 'Date d\'échiance: ';
+$string['general'] = 'Général';
+$string['attempts'] = 'Un enregistrement par étudinat!';
+$string['recording_timelimit'] = 'Le temps d\'enregistrement en minutes. (0 = illimité)';
+$string['not_available'] = 'Cette activité est terminé.Vous pouvez visionner les commentaires de votre enseignant. Vous ne pouvez pas faire de nouveau enregistrement.';
+$string['no_due_date'] = 'Aucune dates d\'échéances entré.';
+$string['no_available_date'] = 'Aucune date entré.';
 $string['submit'] = 'Enregistrer';
 $string['recorderdescription'] = 'Enregistreuse';
-$string['emailsubject'] = 'ActivitÃ© - ';
+$string['emailsubject'] = 'Activité - ';
 $string['emailgreeting'] = 'Bonjour';
-$string['emailbodynewreply'] = 'J\'ai ajoutÃ© un commentaire Ã  votre enregistrement. S\'il vous plaÃ®t retourner Ã  l\'activitÃ© et Ã©couter / lire mes commentaires. ';
-$string['emailbodydelete'] = 'Je vous demande de recommencer votre enregistrement. S\'il vous plaÃ®t retourner Ã  l\'activitÃ© et recommencer. ';
+$string['emailbodynewreply'] = 'J\'ai ajouté un commentaire à votre enregistrement. S\'il vous plaît retourner à l\'activité et écouter / lire mes commentaires. ';
+$string['emailbodydelete'] = 'Je vous demande de recommencer votre enregistrement. S\'il vous plaît retourner à l\'activité et recommencer. ';
 $string['emailthankyou'] = 'Merci';
-$string['submit_recording'] = 'SousmÃªtre votre enregistrement';
-$string['recording_failed_save'] = 'Votre enregistrement n\'a pas Ã©tÃ© enregistrer dans le systÃ¨me';
-$string['recording_saved'] = 'Votre enregistrement Ã  Ã©tÃ© enregistrÃ©';
-$string['words'] = 'Liste de mots pour les Ã©tudiants Ã  enregistrer';
+$string['submit_recording'] = 'Sousmêtre votre enregistrement';
+$string['recording_failed_save'] = 'Votre enregistrement n\'a pas été enregistrer dans le système';
+$string['recording_saved'] = 'Votre enregistrement à été enregistré';
+$string['words'] = 'Liste de mots pour les étudiants à enregistrer';
 
 //XML localization
-$string['XMLLoadFail'] = 'Le fichier XML cne peut Ãªtre trouvÃ©. Communiquer avec votre administrateur.';
-$string['prerequisitesNotMet'] = 'Serveur non spÃ©cifiÃ©. Communiquer avec votre administrateur.';
-$string['warningLossOfWork'] = 'Vous tentez de naviguer hors d\'un enregistrement sur lequel vous avez apportÃ© des modifications. Etes-vous sÃ»r de vouloir annuler vos modifications?';
+$string['XMLLoadFail'] = 'Le fichier XML cne peut être trouvé. Communiquer avec votre administrateur.';
+$string['prerequisitesNotMet'] = 'Serveur non spécifié. Communiquer avec votre administrateur.';
+$string['warningLossOfWork'] = 'Vous tentez de naviguer hors d\'un enregistrement sur lequel vous avez apporté des modifications. Etes-vous sûr de vouloir annuler vos modifications?';
 $string['newRecording'] = 'Nouvel enregistrement';
-$string['newReply'] = 'RÃ©ponse de l\'enseignant';
-$string['timesOut'] = 'Temps est Ã©coulÃ©';
+$string['newReply'] = 'Réponse de l\'enseignant';
+$string['timesOut'] = 'Temps est écoulé';
 $string['submitBlank'] = 'Envoyer';
 $string['submitNew'] = 'Soumettre l\'enregistrement';
 $string['submitChanges'] = 'Envoyer les changements';
 
-$string['subject'] = 'Ã©noncÃ©';
-$string['message'] = 'Ã‰criver votre message ici.';
+$string['subject'] = 'énoncé';
+$string['message'] = 'Écriver votre message ici.';
 $string['btnDiscard'] = 'Annuler les modifications';
 $string['btnCancel'] = 'Annuler';
 $string['submitGrade'] = 'Envoyer la note.';
@@ -52,7 +52,7 @@ $string['minutes'] = 'minutes';
 $string['seconds'] = 'secondes';
 $string['grading'] = 'Note';
 $string['grade'] = 'Note';
-$string['startOver'] = 'L\'Ã©lÃ¨ves doit recommencer';
+$string['startOver'] = 'L\'élèves doit recommencer';
 $string['corrNotes'] = 'Entrer vous commentaire ici';
 
 $string['monday'] = 'lun';
@@ -69,11 +69,11 @@ $string['april'] = 'avr';
 $string['may'] = 'mai';
 $string['june'] = 'jui';
 $string['july'] = 'juil';
-$string['august'] = 'aoÃ»t';
+$string['august'] = 'août';
 $string['september'] = 'sept';
 $string['october'] = 'oct';
 $string['november'] = 'nov';
-$string['december'] = 'dÃ©c';
+$string['december'] = 'déc';
 
 //Criteria no longer ued in the updated version
 $string['criteria'] = 'Criteria';

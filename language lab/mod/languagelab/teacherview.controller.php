@@ -4,10 +4,10 @@
 //***********************************************************
 //**@package languagelab                                   **
 //**@Institution: Campus Saint-Jean, University of Alberta **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonnière  **
+//**@authors : Patrick Thibaudeau, Guillaume Bourbonniï¿½re  **
 //**@version $Id: version.php,v 1.0 2009/05/25 7:33:00    **
 //**@Moodle integration: Patrick Thibaudeau                **
-//**@Flash programming: Guillaume Bourbonnière             **
+//**@Flash programming: Guillaume Bourbonniï¿½re             **
 //**@CSS Developement: Brian Neeland                       **
 //***********************************************************
 //***********************************************************
@@ -37,7 +37,9 @@ echo "parentnode=".$parentnode."<br>";
 echo "studentid=".$studentid."<br>";
 echo "teacherid=".$teacherid."<br>";
 echo "grade=".$grade."<br>";
+echo "correction notes=".$correctionnotes."<br>";
 echo "submissionid=".$submissionid."<br>";
+echo "Language lab student eval id=".$LanguageLabStudentEvaluation_id."<br>";
 
 //**************Object need to pass grades*******************
 $languagelab_obj = $DB->get_record("languagelab", array("id" => $languagelab));
@@ -49,6 +51,43 @@ $teacher_info = $DB->get_record("user", array("id" => $teacherid));
 //Now student
 $student_info = $DB->get_record("user", array("id" => $studentid));
 //***********************************************************
+
+function update_grade($gradeid, $grade, $notes, $languagelab, $studentid, $teacherid) {
+        global $CFG, $DB;
+        //this will be used to create grade record in languagelab_student_eval
+        //Only create one record for the grade. Multiple grade records would break the system.
+        
+	if ($gradeid == 0) { //Will only create the record once
+                
+		$save_grade = array('languagelab' => $languagelab->id, 'userid' => $studentid);
+		$gradeid = $DB->insert_record('languagelab_student_eval',$save_grade);
+	} 
+
+        
+            $update_grade = new object();{
+            $update_grade->id = $gradeid;
+            $update_grade->grade = $grade;
+            $update_grade->correctionnotes = $notes;
+            $update_grade->teacher = $teacherid;
+            $update_grade->timemarked = time();
+            $update_grade->timemodified = time();
+
+	}
+
+            if (!$DB->update_record('languagelab_student_eval',$update_grade)) {
+                    print_simple_box (get_string('evaluation_failed_save','languagelab'),'center','70%');
+                    } else {
+
+                    print_simple_box (get_string('evaluation_saved','languagelab'),'center','70%');
+                    }
+
+        
+// update grade item definition
+    languagelab_update_grades($languagelab);
+
+	return true;
+
+};
 if ($action == 'insert_record') {
 
     //******************Enter reply information into languagelab_submission table********************************
@@ -71,6 +110,11 @@ if ($action == 'insert_record') {
 		} else {
 		print_simple_box (get_string('evaluation_saved','languagelab'),'center','70%');
  		}
+
+        //If grades are being used
+        if ($languagelab_obj->use_grade_book == true) {
+            update_grade($LanguageLabStudentEvaluation_id, $grade, $correctionnotes, $languagelab_obj, $studentid, $teacherid);
+        }
     //********Send email notification to student**************
 	$subject =$languagelab_obj->name;
 	$body = get_string('emailgreeting','languagelab').' '.fullname($student_info)."\n";
@@ -86,42 +130,23 @@ if ($action == 'insert_record') {
 	};
 	//**********************************************************
 	
-	return false ;
+	return true ;
 	
 }
-if ($action == 'update_grade') {
+if ($action == 'update_gradebook') {
 
-	$update_grade = new object();{
-	$update_grade->id = $LanguageLabStudentEvaluation_id;
-	$update_grade->grade = $grade;
-	$update_grade->correctionnotes = $correctionnotes;
-	$update_grade->teacher = $teacherid;
-	$update_grade->timemarked = time();
-	$update_grade->timemodified = time();
-
-	}
-
-	if (!$DB->update_record('languagelab_student_eval',$update_grade)) {
-		print_simple_box (get_string('evaluation_failed_save','languagelab'),'center','70%');
-		} else {
-
-		print_simple_box (get_string('evaluation_saved','languagelab'),'center','70%');
-		}
-		
-	// update grade item definition
-    languagelab_update_grades($languagelab_obj);
-	
-	return false;
+    update_grade($LanguageLabStudentEvaluation_id, $grade, $correctionnotes, $languagelab_obj, $studentid, $teacherid);
 
 }
 if ($action == 'update_record') {
     
     
-    $update_recording = new object(); {
+        $update_recording = new object(); {
 	$update_recording->id = $submissionid;
 	$update_recording->label = $label;
 	$update_recording->message = $message;
 	$update_recording->timemodified = time();
+        }
 
 	if (!$DB->update_record('languagelab_submissions',$update_recording)) {
 		print_simple_box (get_string('evaluation_failed_save','languagelab'),'center','70%');
@@ -130,9 +155,12 @@ if ($action == 'update_record') {
 		print_simple_box (get_string('evaluation_saved','languagelab'),'center','70%');;
 		}
 
-	}
-
-	return false;
+	
+        //If grades are being used
+        if ($languagelab_obj->use_grade_book == true) {
+            update_grade($LanguageLabStudentEvaluation_id, $grade, $correctionnotes, $languagelab_obj, $studentid, $teacherid);
+        }
+	return true;
 	
 	
 }
@@ -159,7 +187,7 @@ if ($action == 'delete_record') {
 	//echo "email sent";
 	};
 	//**********************************************************
-	return false;
+	return true;
 	
 }
 ?>

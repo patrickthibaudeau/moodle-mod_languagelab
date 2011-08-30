@@ -18,7 +18,8 @@
 	//require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
-require_once("$CFG->libdir/resourcelib.php");
+require_once("$CFG->dirroot/lib/resourcelib.php");
+require_once("$CFG->dirroot/lib/filestorage/file_storage.php");
 require_once("locallib.php");
 
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or
@@ -26,7 +27,7 @@ $l  = optional_param('l', 0, PARAM_INT);  // languagelab ID
 $action = optional_param('what', 'view', PARAM_CLEAN); 
 //$usehtmleditor = can_use_html_editor();
 
-global $DB;
+global $CFG,$DB;
 
 if ($id) {
     $cm         = get_coursemodule_from_id('languagelab', $id, 0, false, MUST_EXIST);
@@ -60,39 +61,51 @@ if (groupmode($course, $cm) == SEPARATEGROUPS) {
 } else {
     $groupid = 0;
 }
+
 //print_object($context);
 // Output starts here
 echo $OUTPUT->header();
+
+
 /// Print the main part of the page
 echo $OUTPUT->box_start();
         
         $content = file_rewrite_pluginfile_urls($languagelab->description, 'pluginfile.php', $context->id, 'mod_languagelab', 'content', $languagelab->id);
         $formatoptions = array('noclean'=>true, 'overflowdiv'=>true);
         $content = format_text($content, $languagelab->contentformat, $formatoptions, $course->id);
+        
         echo $OUTPUT->box($content, 'generalbox center clearfix');
+
+    echo '<div align=\'center\'>';
+    
     if (has_capability('mod/languagelab:teacherview', $context, null, true)){
 
     	//print out flash applet
-        echo '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="600" height="365" id="TeacherConsole" align="middle">'."\n";
+        echo '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="800" height="650" id="TeacherConsole" align="middle">'."\n";
 	echo '<param name="allowScriptAccess" value="sameDomain" />'."\n";
-	echo '<param name="allowFullScreen" value="false" />'."\n";
+	echo '<param name="allowFullScreen" value="true" />'."\n";
 	echo '<param name="wmode" value="transparent"> '."\n";
-	echo '<param name="movie" value="TeacherConsole.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="xmlAddress=teacher.param.xml.php?id='.$id.'"/><embed src="TeacherConsole.swf" flashvars="xmlAddress=teacher.param.xml.php?id='.$id.'" quality="high" bgcolor="#ffffff" width="600" height="365" name="TeacherConsole" align="middle" wmode="transparent" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />'."\n";
+	echo '<param name="movie" value="LanguageLabCT.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="xmlAddress=teacher.param.xml.php?id='.$id.'"/><embed src="LanguageLabCT.swf" flashvars="xmlAddress=teacher.param.xml.php?id='.$id.'" quality="high" bgcolor="#ffffff" width="800" height="650" name="TeacherConsole" align="middle" wmode="transparent" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />'."\n";
 	echo '</object>'."\n";
         echo $OUTPUT->box("<a href='classmonitor.php?id=$id' target='_blank'>".get_string('classmonitor','languagelab')."</a>");
-
+	echo "</div>";
 
 
     } else {
+        
     	//print out flash applet
-    	echo '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="700" height="210" id="SimpleRecorderGB2" align="middle">'."\n";
+    	echo '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="400" height="650" id="SimpleRecorderGB2" align="middle">'."\n";
 	echo '<param name="allowScriptAccess" value="sameDomain" />'."\n";
 	echo '<param name="allowFullScreen" value="false" />'."\n";
 	echo '<param name="wmode" value="transparent"> '."\n";
-	echo '<param name="movie" value="LanguageLabCT.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="xmlAddress=student.param.xml.php?id='.$id.'"/>	<embed src="LanguageLabCT.swf" wmode="transparent" flashvars="xmlAddress=student.param.xml.php?id='.$id.'" quality="high" bgcolor="#ffffff" width="700" height="210" name="StudentConsole" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />'."\n";
+	echo '<param name="movie" value="LanguageLabCT.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="xmlAddress=student.param.xml.php?id='.$id.'"/>	<embed src="LanguageLabCT.swf" wmode="transparent" flashvars="xmlAddress=student.param.xml.php?id='.$id.'" quality="high" bgcolor="#ffffff" width="400" height="650" name="StudentConsole" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />'."\n";
 	echo '</object>'."\n";
-
+           echo '</div>';
         //print out restrictions
+        
+        //We need to determine if activity is available for the times chosen by teacher
+	$now =time();
+	$available = $languagelab->timeavailable < $now && ($now < $languagelab->timedue || !$languagelab->timedue);
         if (!$available)  {
 
 		//Enter the proper date/time or a text message if no date/time

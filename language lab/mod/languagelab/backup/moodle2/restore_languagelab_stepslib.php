@@ -93,6 +93,7 @@ class restore_languagelab_activity_structure_step extends restore_activity_struc
         global $DB;
         // Add tab related files where itemname = languagelab (taken from $this->set_mapping)
         $this->add_related_files('mod_languagelab', 'content', 'languagelab');
+		 $this->add_related_files('mod_languagelab', 'mastertrack', 'languagelab');
 
     }
 }
