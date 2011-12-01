@@ -32,12 +32,11 @@ $PAGE->set_heading($course->shortname);
 echo $OUTPUT->header();
 ?>
 <style type="text/css" media="screen">
-		html, body { height:100%; background-color: #ffffff;}
-		body { margin:0; padding:0; overflow:hidden; }
+		
 		#ClassroomMonitor { width:100%; height:100%; }
 		</style>
 		<div id="flashContent">
-			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="700" height="550" id="ClassroomMonitor" align="middle">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="800" height="900" id="ClassroomMonitor" align="middle">
 				<param name="movie" value="ClassroomMonitor.swf" />
 				<param name="quality" value="high" />
 				<param name="bgcolor" value="#ffffff" />
@@ -52,7 +51,7 @@ echo $OUTPUT->header();
 				<param name="allowScriptAccess" value="sameDomain" />
                                 <param name="FlashVars" value="param=<?php echo $filename?>" />
 				<!--[if !IE]>-->
-				<object type="application/x-shockwave-flash" data="ClassroomMonitor.swf" width="700" height="550">
+				<object type="application/x-shockwave-flash" data="ClassroomMonitor.swf" width="800" height="900">
 					<param name="movie" value="ClassroomMonitor.swf" />
 					<param name="quality" value="high" />
 					<param name="bgcolor" value="#ffffff" />
@@ -77,5 +76,5 @@ echo $OUTPUT->header();
 		</div>
 
 <?php
-$OUTPUT->footer();
+echo $OUTPUT->footer();
 ?>

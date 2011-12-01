@@ -12,7 +12,8 @@
 //***********************************************************
 //***********************************************************
 
-$module->version  = 2011082900;  // The current module version (Date: YYYYMMDDXX)
+$module->version  = 2011113000;  // The current module version (Date: YYYYMMDDXX)
+$module->requires = 2010112400; 
 $module->cron     = 0;           // Period for cron to check this module (secs)
 
 ?>

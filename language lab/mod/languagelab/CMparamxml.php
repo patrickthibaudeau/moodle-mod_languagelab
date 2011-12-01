@@ -38,7 +38,10 @@ $userpictureurl = $OUTPUT->user_picture($teacher, array('courseid' => $course->i
 //create an array from the image tag
 $newuserpictureurl = explode(' ',$userpictureurl);
 //Get the link info from array row 1 and remove src="
+
 $teacherpicture = str_replace('src="', '', $newuserpictureurl[1]);
+$teacherpicture = str_replace('f2','f1',$teacherpicture);
+
 //remove last double quotation marks;
 $teacherpicture = str_replace('"', '', $teacherpicture);
 
