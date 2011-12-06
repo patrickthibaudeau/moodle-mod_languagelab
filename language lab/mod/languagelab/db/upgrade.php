@@ -157,6 +157,14 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011113000, 'languagelab');
     }
+    if ($oldversion < 2011120500) {
+
+        //Removed XML Socket settings
+		//Updated LanguageLabCT.swf
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011120500, 'languagelab');
+    }
 
  return;
 
