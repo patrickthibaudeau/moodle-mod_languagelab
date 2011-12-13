@@ -43,6 +43,10 @@ $string['submit_recording'] = 'Submit your recording';
 $string['recording_failed_save'] = 'Failed to save your recording to the database';
 $string['recording_saved'] = 'Your recording has been submitted';
 $string['recording_exists'] = 'Notice: you already have a recording. Please review the recording before pressing the record button.<br>Pressing the record button will erase the previous recording.';
+$string['master_track_recorder'] = 'Record your own Master track';
+$string['master_track_recorder_help'] = 'A master track is recording containing audio samples with blank spaces allowing students to
+                                record themselves during the blank spaces.<br>We had to integrate in this fashion because Flash does not
+                                allow pausing while recording.';
 $string['previous_recording'] = 'Your previous recordings: ';
 
 //XML localization
@@ -108,13 +112,9 @@ $string['languagelab:teacherview'] = 'Language lab: Teacher view.';
 $string['select_group_type'] = 'Select group type';
 
 
-$string['xssAddress'] = 'XML Socket Server Address';
-$string['xssAddresshelp'] = 'The IP address or fully qualified name of the XML Socket Server.';
-$string['xssAddress_name'] = 'Enter the IP address or FQDN of your XML socket server';
-$string['xssPort'] = 'XML Socket Server port.';
-$string['xssPorthelp'] = 'The port number used by XML Socket Server.';
-
 $string['classmonitor'] = 'Monitor your class';
+$string['salt'] = 'Password salt value:';
+$string['salt_help'] = 'Enter the password salt value for your red5 instance as provided by your red5 administrator.';
 $string['stealthmode'] = 'Activate stealth mode?';
 $string['stealthmodehelp'] = 'When activated, students will not know that they are being monitored when the teacher uses the classroom monitor.';
 $string["use_video"] = 'Allow video.';
@@ -123,26 +123,5 @@ $string["use_grade_book_help"] = 'By default, no grading will be given for langu
 $string["video"] = 'Allowing video.';
 $string["video_help"] = 'Check this box if you would like your students to use video and audio while recording. This can be helpful, for example, for sign language.';
 
-//previously in languagelab block
-$string["ffmpeg"] = 'Path to ffmpeg executable.';
-$string["ffmpeghelp"] = 'Entering the path to the ffmpeg executable will enable you to convert recorded streams to mp3.';
-$string["ftpdirectory"] = 'FTP folder to the Red5 streams';
-$string["ftpdirectoryhelp"] = 'FTP folder to the Red5 streams. Usaully /';
-$string["ftphost"] = 'IP or DNS address of your FTP server.';
-$string["ftphosthelp"] = 'You only need to enter an FTP address if the Red5 Server is not installed on the same physical serve. You will need an FTP connection to the Red5 server stream folder inorder to perform backups and conversions';
-$string["ftpusername"] = 'FTP Accountusername.';
-$string["ftpuserpassword"] = 'FTP Account password.';
-$string["ftpuserpasswordhelp"] = 'Password.';
-$string["ftpport"] = 'FTP Port number.';
-$string["ftpporthelp"] = 'Port number used for your FTP server.';
-$string["ftpprotocolhelp"] = 'Protocol used to connect to the FTP server.';
-$string["ftpprotocol"] = 'FTP protocol.';
-$string["ftpprotocolhelp"] = 'Protocol used to connect to the FTP server.';
-$string["ftpusernamehelp"] = 'Username used to access FTP site.';
-$string["getffmpeg"] = 'You should ask your administrator to install FFMPEG on your server. This would cut file size by 25%.';
-$string["localred5"] = 'Is your Red5 server hosted on the same server as moodle?';
-$string["localred5help"] = 'If your Red5 Server installation is hosted on the same server as your Moodle server, check this box. If not leave blank and enter the FTP information';
-$string["red5path"] = 'Path to the Red5 server stream folder.';
-$string["red5pathhelp"] = 'Enter the path to the Red5 server stream folder.';
 
 ?>

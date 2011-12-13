@@ -51,7 +51,13 @@ $available = $languagelab_params->timeavailable < $now && ($now < $languagelab_p
 
 //************************Get master track*******************************
 if (isset($languagelab->master_track)){
-$mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+    //check to find out if MP3.
+    if (strpos($languagelab->master_track, '.mp3') == false) {
+        $mastertrack = $languagelab->master_track;
+    } else {
+        $mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+    }
+
 } else {
     $mastertrack = '';
 }
@@ -245,8 +251,6 @@ $writer->startElement('playerParam'); //playerParam start
             $writer->writeAttribute('languageLabId',$languagelab->id);
             $writer->writeAttribute('courseModuleId',$cm->id);
             $writer->writeAttribute('courseId',$course->id);
-            $writer->writeAttribute('xssAddress',$CFG->languagelab_xssAddress);
-            $writer->writeAttribute('xssPort',$CFG->languagelab_xssPort);
             $writer->writeAttribute('courseName',trim($course->fullname));
             $writer->writeAttribute('activityName',$languagelab->name);
             $writer->writeAttribute('masterTrack',$mastertrack);

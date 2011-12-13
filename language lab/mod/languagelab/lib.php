@@ -55,6 +55,10 @@ function languagelab_supports($feature) {
  *
  * @param object $instance An object from the form in mod.html
  * @return int The id of the newly inserted languagelab record
+ * @global moodle_database $DB
+ * @global core_renderer $OUTPUT
+ * @global moodle_page $PAGE.
+
  **/
 function languagelab_add_instance($languagelab, $mform=null) {
 	global $DB, $CFG;
@@ -79,6 +83,8 @@ function languagelab_add_instance($languagelab, $mform=null) {
                 $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
                 $languagelab->master_track = $filename;
 
+            } else {
+                $languagelab->master_track = $languagelab->master_track_recording;
             }
         }
     
@@ -132,6 +138,8 @@ function languagelab_update_instance($languagelab, $mform=null) {
                 $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
                 $languagelab->master_track = $filename;
 
+            } else {
+                $languagelab->master_track = $languagelab->master_track_recording;
             }
         }
     # May have to add extra stuff in here #

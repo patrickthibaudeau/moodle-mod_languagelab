@@ -54,7 +54,13 @@ $students = get_enrolled_users($context,'mod/languagelab:studentview');
 
 //************************Get master track*******************************
 if (isset($languagelab->master_track)){
-$mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+    //check to find out if MP3.
+    if (strpos($languagelab->master_track, '.mp3') == false) {
+        $mastertrack = $languagelab->master_track;
+    } else {
+        $mastertrack = moodle_url::make_pluginfile_url($context->id,'mod_languagelab','mastertrack',0,'/',$languagelab->master_track);
+    }
+
 } else {
     $mastertrack = '';
 }
@@ -227,8 +233,6 @@ $writer->startElement('playerParam');
             $writer->writeAttribute('targetPost','./teacherview.controller.php');
             $writer->writeAttribute('languageLabId',$languagelab->id);
             $writer->writeAttribute('courseModuleId',$cm->id);
-            $writer->writeAttribute('xssAddress',$CFG->languagelab_xssAddress);
-            $writer->writeAttribute('xssPort',$CFG->languagelab_xssPort);
             $writer->writeAttribute('courseName',$course->fullname);
             $writer->writeAttribute('activityName',$languagelab->name);
             $writer->writeAttribute('useGradeBook',$languagelab->use_grade_book);

@@ -19,6 +19,8 @@ $settings->add(new admin_setting_configtext('languagelab_max_users', get_string(
                    get_string('maxusershelp', 'languagelab'), '25', PARAM_INT));
 $settings->add(new admin_setting_configcheckbox('languagelab_stealthMode', get_string('stealthmode', 'languagelab'),
                    get_string('stealthmodehelp', 'languagelab'), '0', 1,0));
+$settings->add(new admin_setting_configtext('languagelab_salt', get_string('salt', 'languagelab'),
+                   get_string('salt_help', 'languagelab'), '', PARAM_TEXT));
 //ffmpeg for file conversion
 //$settings->add(new admin_setting_configexecutable('ffmpeg', get_string('ffmpeg', 'languagelab'),
  //                  get_string('ffmpeghelp','languagelab'), ''));

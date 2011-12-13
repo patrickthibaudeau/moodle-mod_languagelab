@@ -165,6 +165,21 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011120500, 'languagelab');
     }
+        if ($oldversion < 2011121200) {
+
+        // Define field master_track_recording to be added to languagelab
+        $table = new xmldb_table('languagelab');
+        $field = new xmldb_field('master_track_recording', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'master_track');
+
+        // Conditionally launch add field master_track_recording
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011121200, 'languagelab');
+    }
+
 
  return;
 

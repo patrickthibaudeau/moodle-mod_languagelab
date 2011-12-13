@@ -18,10 +18,96 @@ require_once($CFG->libdir.'/filelib.php');
 
 
 class mod_languagelab_mod_form extends moodleform_mod {
+/**
+     * @global moodle_database $DB
+     * @global core_renderer $OUTPUT
+     * @global moodle_page $PAGE.
+     */
 
     function definition() {
-        global $CFG, $USER;
+        global $CFG, $USER, $DB;
         
+        //flash recorder component
+        if (isset($_REQUEST['update'])){
+            if ($_REQUEST['update'] <> 0){
+                $languagelab = $DB->get_record('languagelab',array('id'=>$this->current->instance));
+            }
+        }
+        //Code needed to add recorder
+        if(isset($languagelab->master_track_recording)) {
+            $recordingname = $languagelab->master_track_recording;
+        } else {
+            $recordingname = $CFG->languagelab_prefix.'_mastertrack_'.time();
+        }
+
+
+        //echo $recordingname;
+        //find out if students have submitted work
+        $submitted_recordings = $DB->count_records('languagelab_submissions', array('languagelab' => $languagelab->id));
+	if ($submitted_recordings > 0) {
+            $record_button = 'false';
+        } else {
+            $record_button = 'true';
+        }
+        $flashvars = $CFG->languagelab_red5server.','.$recordingname.','.$record_button;
+        //$key = 'LanguageLabFlashVars124956496';
+        $enc_flashvars =base64_encode($flashvars);
+
+        //This is the Flash player required for recording the master track
+        $recorder = <<<HERE
+        <script type="text/javascript"  src="$CFG->wwwroot/mod/languagelab/flash.js"></script>
+                            <script language="JavaScript" type="text/javascript">
+            AC_FL_RunContent(
+                'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
+                'width', '215',
+                'height', '138',
+                'src', '$CFG->wwwroot/mod/languagelab/flash/AudioFilter',
+                'quality', 'high',
+                'pluginspage', 'http://www.adobe.com/go/getflashplayer',
+                'align', 'middle',
+                'play', 'true',
+                'loop', 'true',
+                'scale', 'showall',
+                'wmode', 'window',
+                'devicefont', 'false',
+                'id', 'AudioFilter',
+                'bgcolor', 'D4D0C8',
+                'name', 'AudioFilter',
+                'menu', 'true',
+                'allowFullScreen', 'false',
+                'allowScriptAccess','always',
+                'allowNetworking', 'all',
+                'bgcolor', '#ffffff',
+                'flashvars','sData=$enc_flashvars',
+                'movie', '$CFG->wwwroot/mod/languagelab/flash/AudioFilter',
+                'salign', ''
+                ); //end AC code
+                /*
+                Here's what the recorder player needs in order to work.
+                To play:
+                    in flashvars:
+                        server: address of the FMS server without protocol prefix nor folder suffix
+                        sname: name of the stream to be played / recorded
+
+                To record:
+                    same as above plus:
+                        in flashVars:
+                            sRec property set to true -- DO NOT DEFINE the sRec PROPERTY UNLESS YOU WANT TO ENABLE IT. It would be way too easy to guess how to hack a teacher's recording otherwise.
+                        in other parameters:
+                            height must be set to at least 138 or else flash won't access webcam or mic
+                Let me know if you have any question.
+                */
+        </script>
+                    <noscript>
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="215" height="138" id="AudioFilter" align="middle">
+            <param name="allowScriptAccess" value="always" />
+            <param name="allowFullScreen" value="false" />
+            <param name="movie" value="$CFG->wwwroot/mod/languagelab/flash/';?>AudioFilter.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	<embed src="$CFG->wwwroot/mod/languagelab/flash/AudioFilter.swf" quality="high" bgcolor="#ffffff" width="215" height="24" name="AudioFilter" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
+            </object>
+        </noscript>
+HERE;
+        //Change this value to false once MP3 works again
+        $notfunctional = true;
 	$editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES);
         $mform =& $this->_form;
         $config = get_config('languagelab');
@@ -31,7 +117,17 @@ class mod_languagelab_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
 
         $mform->addElement('editor', 'content', get_string('description', 'languagelab'),null, $editoroptions);
-        $mform->addElement('filepicker', 'master_track', get_string('master_track','languagelab'), null, array('subdirs' => 0, 'maxfiles' => 1, 'accepted_types' => array('*.mp3') ));
+        $mform->addElement('static','master_track_recorder',get_string('master_track_recorder','languagelab'),$recorder);
+        $mform->addHelpButton('master_track_recorder', 'master_track_recorder', 'languagelab');
+        //This actual file name
+        $mform->addElement('hidden','master_track_recording', $recordingname);
+        if ($notfunctional == true) {
+            $mform->addElement('hidden', 'master_track');  
+        } else {
+            $mform->addElement('filepicker', 'master_track', get_string('master_track','languagelab'), null, array('subdirs' => 0, 'maxfiles' => 1, 'accepted_types' => array('*.mp3') ));
+        }
+        
+        
         $mform->addHelpButton('master_track', 'master_track', 'languagelab');
         $mform->addElement('static','master_track_file',get_string('master_track_file','languagelab'),'');
         $mform->addElement('advcheckbox','attempts',get_string('attempts','languagelab'),null);

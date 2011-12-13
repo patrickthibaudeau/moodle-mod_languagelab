@@ -65,8 +65,6 @@ $writer->startElement('params');
             $writer->writeAttribute('streamingServer',$CFG->languagelab_red5server);
             $writer->writeAttribute('teacherStream', $CFG->languagelab_prefix.'_'.$USER->id.'_classmon_'.time());
             $writer->writeAttribute('stealthMode', $CFG->languagelab_stealthMode);
-            $writer->writeAttribute('socketServerIP',$CFG->languagelab_xssAddress);
-            $writer->writeAttribute('socketServerPort',$CFG->languagelab_xssPort);
             $writer->writeAttribute('userID',$USER->id);
             $writer->writeAttribute('userPortrait', $teacherpicture);
         $writer->endElement(); // env
