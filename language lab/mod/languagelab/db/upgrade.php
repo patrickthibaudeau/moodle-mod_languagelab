@@ -179,6 +179,28 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011121200, 'languagelab');
     }
+        if ($oldversion < 2011121500) {
+
+        // Define field use_mp3 to be added to languagelab
+        $table = new xmldb_table('languagelab');
+        $field = new xmldb_field('use_mp3', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'master_track_recording');
+
+        // Conditionally launch add field use_mp3
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011121500, 'languagelab');
+    }
+    if ($oldversion < 2011121701) {
+
+        //Added Red5 Adapter Plugin File name admin setting
+        //Added Security level for the RAP Server 
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2011121701, 'languagelab');
+    }
 
 
  return;

@@ -1,16 +1,17 @@
 <?php
-//***********************************************************
-//**               LANGUAGE LAB MODULE 1                   **
-//***********************************************************
-//**@package languagelab                                   **
-//**@Institution: Campus Saint-Jean, University of Alberta **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonni?re  **
-//**@version $Id: version.php,v 1.0 2009/05/25 7:33:00    **
-//**@Moodle integration: Patrick Thibaudeau                **
-//**@Flash programming: Guillaume Bourbonni?re             **
-//**@CSS Developement: Brian Neeland                       **
-//***********************************************************
-//***********************************************************
+//************************************************************************
+//************************************************************************
+//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//************************************************************************
+//**@package languagelab                                                **
+//**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
+//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
+//**@version $Id: version.php,v 1.0 2011/12/17                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//**@Flash programming: Guillaume Bourbonniere                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//************************************************************************
+//************************************************************************
 defined('MOODLE_INTERNAL') || die;
 require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->libdir.'/filelib.php');
@@ -43,9 +44,13 @@ class mod_languagelab_mod_form extends moodleform_mod {
 
         //echo $recordingname;
         //find out if students have submitted work
-        $submitted_recordings = $DB->count_records('languagelab_submissions', array('languagelab' => $languagelab->id));
-	if ($submitted_recordings > 0) {
-            $record_button = 'false';
+        if (isset($languagelab->id)) {
+            $submitted_recordings = $DB->count_records('languagelab_submissions', array('languagelab' => $languagelab->id));
+                if ($submitted_recordings > 0) {
+                    $record_button = 'false';
+                } else {
+                    $record_button = 'true';
+                }
         } else {
             $record_button = 'true';
         }
@@ -106,8 +111,7 @@ class mod_languagelab_mod_form extends moodleform_mod {
             </object>
         </noscript>
 HERE;
-        //Change this value to false once MP3 works again
-        $notfunctional = true;
+        
 	$editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES);
         $mform =& $this->_form;
         $config = get_config('languagelab');
@@ -121,14 +125,15 @@ HERE;
         $mform->addHelpButton('master_track_recorder', 'master_track_recorder', 'languagelab');
         //This actual file name
         $mform->addElement('hidden','master_track_recording', $recordingname);
-        if ($notfunctional == true) {
-            $mform->addElement('hidden', 'master_track');  
-        } else {
+        if ($submitted_recordings == 0) {
             $mform->addElement('filepicker', 'master_track', get_string('master_track','languagelab'), null, array('subdirs' => 0, 'maxfiles' => 1, 'accepted_types' => array('*.mp3') ));
+            $mform->addHelpButton('master_track', 'master_track', 'languagelab');
+            $mform->addElement('checkbox','use_mp3',get_string('use_mp3','languagelab'));
+            $mform->addHelpButton('use_mp3', 'use_mp3', 'languagelab');
+            //$mform->setDefault('use_mp3', true);
         }
-        
-        
-        $mform->addHelpButton('master_track', 'master_track', 'languagelab');
+        $mform->addElement('hidden','submitted_recordings', $submitted_recordings);
+        $mform->addElement('hidden','master_track_used');
         $mform->addElement('static','master_track_file',get_string('master_track_file','languagelab'),'');
         $mform->addElement('advcheckbox','attempts',get_string('attempts','languagelab'),null);
         $mform->addHelpButton('attempts', 'attempts', 'languagelab');
@@ -181,6 +186,8 @@ HERE;
             $default_values['content']['text']   = file_prepare_draft_area($draftitemid, $this->context->id, 'mod_languagelab', 'content',$languagelab->id , $editoroptions, $languagelab->description);
             $default_values['content']['itemid'] = $draftitemid;
             $default_values['master_track_file'] = $languagelab->master_track;
+            $default_values['master_track_used'] = $languagelab->master_track;
+            
             
         }
     }

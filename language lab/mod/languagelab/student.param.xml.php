@@ -1,4 +1,17 @@
 <?php
+//************************************************************************
+//************************************************************************
+//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//************************************************************************
+//**@package languagelab                                                **
+//**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
+//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
+//**@version $Id: version.php,v 1.0 2011/12/17                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//**@Flash programming: Guillaume Bourbonniere                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//************************************************************************
+//************************************************************************
 session_cache_limiter('nocahce'); //Needed for XML to load with IE
 //header("Cache-Control: no-cache"); //Prevent caching issues with MSIE
 require_once("../../config.php");

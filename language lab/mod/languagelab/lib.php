@@ -1,18 +1,17 @@
 <?php
-//***********************************************************
-//**               LANGUAGE LAB MODULE 1                   **
-//***********************************************************
-//**@package languagelab                                   **
-//**@Institution: Campus Saint-Jean, University of Alberta **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonni�re  **
-//**@version $Id: version.php,v 1.0 2009/05/25 7:33:00    **
-//**@Moodle integration: Patrick Thibaudeau                **
-//**@Flash programming: Guillaume Bourbonni�re             **
-//**@CSS Developement: Brian Neeland                       **
-//***********************************************************
-//***********************************************************
-
-/// (replace languagelab with the name of your module and delete this line)
+//************************************************************************
+//************************************************************************
+//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//************************************************************************
+//**@package languagelab                                                **
+//**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
+//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
+//**@version $Id: version.php,v 1.0 2011/12/17                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//**@Flash programming: Guillaume Bourbonniere                          **
+//**@Moodle integration: Patrick Thibaudeau                             **
+//************************************************************************
+//************************************************************************
 
 
 defined('MOODLE_INTERNAL') || die();
@@ -73,6 +72,12 @@ function languagelab_add_instance($languagelab, $mform=null) {
     $languagelab->contentformat = $languagelab->content['format'];
     $languagelab->description = $languagelab->content['text'];
     $languagelab->timemodified = time();
+    //Check to see that a value is set for use_mp3
+    if (isset($languagelab->use_mp3)){
+        $languagelab->use_mp3 = 1;
+    } else {
+        $languagelab->use_mp3 = 0;
+    }
     //Uploaded file
     if ($mform) {
             $filename = $mform->get_new_filename('master_track');
@@ -82,6 +87,7 @@ function languagelab_add_instance($languagelab, $mform=null) {
                 $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
                 $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
                 $languagelab->master_track = $filename;
+                $languagelab->use_mp3 = 1;
 
             } else {
                 $languagelab->master_track = $languagelab->master_track_recording;
@@ -128,20 +134,35 @@ function languagelab_update_instance($languagelab, $mform=null) {
     $languagelab->description = $languagelab->content['text'];
     $languagelab->timemodified = time();
     $languagelab->id = $languagelab->instance;
+    //Check to see that a valu is set for use_mp3
+    if (isset($languagelab->use_mp3)){
+        $languagelab->use_mp3 = 1;
+    } else {
+        $languagelab->use_mp3 = 0;
+    }
     //Uploaded file
-    if ($mform) {
-            $filename = $mform->get_new_filename('master_track');            
-            if ($filename !== false) {
-                $scorm->reference = $filename;
-                $fs = get_file_storage();
-                $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
-                $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
-                $languagelab->master_track = $filename;
+    if ($languagelab->submitted_recordings == 0) {
+        if ($mform) {
+                $filename = $mform->get_new_filename('master_track');            
+                if ($filename !== false) {
+                    $scorm->reference = $filename;
+                    $fs = get_file_storage();
+                    $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
+                    $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
+                    $languagelab->master_track = $filename;
+                    $languagelab->use_mp3 = 1;
+                    
 
-            } else {
-                $languagelab->master_track = $languagelab->master_track_recording;
+                } else {
+                  
+                    if ($languagelab->use_mp3 == true){
+                        $languagelab->master_track = $languagelab->master_track_used;
+                    } else {
+                        $languagelab->master_track = $languagelab->master_track_recording;
+                    }
+                }
             }
-        }
+    }
     # May have to add extra stuff in here #
     $temp = $DB->update_record("languagelab", $languagelab);
 
@@ -174,13 +195,53 @@ function languagelab_update_instance($languagelab, $mform=null) {
  * @return boolean Success/Failure
  **/
 function languagelab_delete_instance($id) {
-	global $DB;
+	global $DB, $CFG;
+    
+   //Is the Red5 Adapter Plugin set
+    if (isset($CFG->languagelab_adapter_file)) {
+        //Let's delete all files on the Red5 Server
+        $Red5Server = $CFG->languagelab_red5server;
+        $prefix = $CFG->languagelab_prefix;
+        $salt = $CFG->languagelab_salt;
+        //RAP security
+        if ($CFG->languagelab_adapter_access == true) {
+            $security = 'https://';
+        } else {
+            $security = 'http://';
+        }
+        $url = "$security$Red5Server/$CFG->languagelab_adapter_file.php";
+        
+        //Encrypt information
+        $q = md5($Red5Server.$prefix.$salt);
+        //Action delete
+        $o = md5('delete'.$salt);
 
+        //Get all language lab recordings
+        $master_track = $DB->get_record('languagelab', array('id' => $id));
+        $master_track_recording = $master_track->master_track_recording;
+        //Get student submissions
+        if ($submissions = $DB->get_records('languagelab_submissions', array('languagelab' => $id))){
+            $submissions = json_encode($submissions);
+        } else {
+            $submissions = '';
+        }
+
+
+        $vars = "q=$q&o=$o&s=$submissions&m=$master_track_recording";
+
+        //Send request to red5 server using curl
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+
+        $result = curl_exec($ch);
+    }
+    //*************End RAP********************************************
     if (!$languagelab = $DB->get_record("languagelab", array("id" => $id))) {
         return false;
     }
-
-    $result = true;
 
     # Delete any dependent records here #
     $DB->delete_records("languagelab_student_eval", array("languagelab" => $languagelab->id));
@@ -190,8 +251,11 @@ function languagelab_delete_instance($id) {
         $result = false;
     }
     languagelab_grade_item_delete($languagelab);
+    
+    $result = true;
 
     return $result;
+     
 }
 
 /**

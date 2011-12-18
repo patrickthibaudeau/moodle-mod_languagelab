@@ -1,43 +1,94 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <params>
  <config>
- <!-- stealthMode has been added to the env variables -->
-  <env streamingServer="129.128.136.21" teacherStream="mdl_dev_patrick_2_classmon_1297897823" stealthMode="1" socketServerIP="xmlsocket.csj.ualberta.ca" socketServerPort="80" userID="2" userPortrait="http://localhost/moodle/theme/image.php?theme=nonzero&amp;amp;image=u%2Ff2"/>
+  <env streamingServer="129.128.136.206" teacherStream="mdl_dev_patrick_4_classmon_1322517357" stealthMode="0" socketServerIP="patrickt.csj.ualberta.ca" socketServerPort="2468" userID="2" userPortrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/25/user/icon/oohoo/f2"/>
   <localization/>
  </config>
  <courses>
- <!-- The course node structure has changed to accomodate the new XSS Structure -->
-  <course id="1" name="Course 01">
-  	<activity id="1" name="Activity 01" group="0"/>
-		<student id="20">
-			<recording stream="teststream0001" />
-			<recording stream="teststream0002" />
-			<recording stream="teststream0003" />
-		</student>
-		<student id="21">
-			<recording stream="teststream0004" />
-			<recording stream="teststream0005" />
-			<recording stream="teststream0006" />
-		</student>
-  	<activity id="2" name="Activity 02" group="0"/>
-  </course>
-  <course id="2" name="Test">
-	<activity id="2" name="New language lab" group="0"/>
-  	<activity id="3" name="Activity 03" group="0"/>
-  	<activity id="4" name="Activity 04" group="0"/>
+  <course id="82" name="Moodle language tools">
+   <activity id="271" name="Language lab Sample" group="0">
+    <student id="230"/>
+    <student id="250"/>
+    <student id="231"/>
+    <student id="243"/>
+    <student id="3">
+     <recording stream="mdl_dev_patrick_271_3_1319899048"/>
+     <recording stream="mdl_dev_patrick_271_3_1322368733"/>
+    </student>
+    <student id="229"/>
+    <student id="238"/>
+    <student id="237"/>
+    <student id="247"/>
+    <student id="253"/>
+    <student id="233"/>
+    <student id="234"/>
+    <student id="5">
+     <recording stream="mdl_dev_patrick_271_5_1319899336"/>
+    </student>
+    <student id="251"/>
+    <student id="242"/>
+    <student id="255"/>
+    <student id="248"/>
+    <student id="235"/>
+    <student id="244"/>
+    <student id="232">
+     <recording stream="mdl_dev_patrick_271_232_1322516208"/>
+     <recording stream="mdl_dev_patrick_271_232_1322516242"/>
+    </student>
+    <student id="241"/>
+    <student id="227"/>
+    <student id="245"/>
+    <student id="236"/>
+    <student id="254"/>
+    <student id="228">
+     <recording stream="mdl_dev_patrick_271_228_1320249470"/>
+     <recording stream="mdl_dev_patrick_271_228_1320249728"/>
+     <recording stream="mdl_dev_patrick_271_228_1320249764"/>
+     <recording stream="mdl_dev_patrick_271_228_1320250376"/>
+     <recording stream="mdl_dev_patrick_271_228_1320250853"/>
+     <recording stream="mdl_dev_patrick_271_228_1320251103"/>
+    </student>
+    <student id="240"/>
+    <student id="249"/>
+    <student id="246"/>
+    <student id="239"/>
+    <student id="2"/>
+   </activity>
   </course>
  </courses>
-<!-- all details from all students registered goes here -->
-<students>
-	<student id="20" name="Melanie C. Carter" portrait="http://www.diversiteartistique.org/files/galleries/bo_huang/th_portrait_of_mr_edgar_fruitier.jpg"/>
-	<student id="21" name="Wilma S. Clifton" portrait="http://www.diversiteartistique.org/files/galleries/bo_huang/th_portrait_of_mr_edgar_fruitier.jpg"/>
-	<student id="10" name="Nicholas Sarkozy" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/10/f1.jpg"/>
-	<student id="8" name="Wen Jiabaom" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/8/f1.jpg"/>
-	<student id="4" name="John Doe" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/26/user/icon/f1"/>
-	<student id="7" name="Kevin Rudd" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/7/f1.jpg"/>
-	<student id="6" name="Heinz Fischer" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/6/f1.jpg"/>
-	<student id="9" name="Cristian Fernandez de Kirchner" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/9/f1.jpg"/>
-	<student id="5" name="Barack Obama" portrait="http://moodleupgrade.csj.ualberta.ca/user/pix.php/5/f1.jpg"/>
-</students>
-
+ <students>
+  <student id="230" name="Benton Barber" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="250" name="Amelie Bigras" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="231" name="Benvolio Dinlickie" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="243" name="Bernie Dinos" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="3" name="John Doe" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/24/user/icon/oohoo/f1"/>
+  <student id="229" name="Bentley Downs" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="238" name="Berk Enstock" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="237" name="Beriszl Forcier" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="247" name="Bersh Hall" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="253" name="Emily Hines" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="233" name="Berg Ice" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="234" name="Bergen Johns" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="5" name="Billy Bob Johnson" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/29/user/icon/oohoo/f1"/>
+  <student id="251" name="Nicole Lugosi" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"
+/>
+  <student id="242" name="Bernardo Nintuk" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="255" name="Lise Niyuhire" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="248" name="Bert Oats" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="235" name="Berger Parler" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="244" name="Berny Patrick" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="232" name="Berenger Patritov" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/301/user/icon/oohoo/f1"/>
+  <student id="241" name="Bernard Shaw" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="227" name="Benny Smith" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/pluginfile.php/296/user/icon/oohoo/f1"/>
+  <student id="245" name="Berowne Smyth" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="236" name="Bergren Steinki" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="254" name="Dorothy Thunder" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="228" name="Benson Tremblay" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="240" name="Berkly Trudelle" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="249" name="Berthold Tutu" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="246" name="Berrigan Tyler" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="239" name="Berkeley Univer" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+  <student id="2" name="Admin User" portrait="http://pm-305-patrick.csj.ualberta.ca/moodle/theme/image.php?theme=oohoo&amp;amp;image=u%2Ff1"/>
+ </students>
 </params>
