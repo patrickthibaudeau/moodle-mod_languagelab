@@ -10,7 +10,7 @@ class backup_languagelab_activity_structure_step extends backup_activity_structu
         $userinfo = $this->get_setting_value('userinfo');
 
         // Define each element separated
-        $languagelab = new backup_nested_element('languagelab', array('id'), array('name','course','description', 'contentformat', 'timedue','timeavailable','grade','recording_timelimit','attempts','video','use_grade_book','group_type','master_track','timemodified'));
+        $languagelab = new backup_nested_element('languagelab', array('id'), array('name','course','description', 'contentformat', 'timedue','timeavailable','grade','recording_timelimit','attempts','video','use_grade_book','group_type','master_track','master_track_recording','timemodified'));
 
         //languaglab submissions table
         $languagelab_submissions = new backup_nested_element('languagelab_submissions');
