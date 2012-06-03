@@ -13,10 +13,11 @@
 //************************************************************************
 //************************************************************************
 
-$module->version  = 2012052200;  // The current module version (Date: YYYYMMDDXX)
+$module->version  = 2012060300;  // The current module version (Date: YYYYMMDDXX)
 $module->requires = 2010112400;
 $module->maturity = MATURITY_RC;
-$module->release = '2.0.5 (Build: 20120312)';
+$module->release = '3.0.0 (Build: 2012060300)';
 $module->cron     = 0;           // Period for cron to check this module (secs)
+$plugin->component = 'mod_languagelab';
 
 ?>
