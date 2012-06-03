@@ -1,19 +1,23 @@
 <?php
 //************************************************************************
 //************************************************************************
-//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//**               LANGUAGE LAB Version 3 for Moodle 2                  **
 //************************************************************************
 //**@package languagelab                                                **
 //**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
+//**@authors : Patrick Thibaudeau,Guillaume Bourbonniere,Nicolas Bretin **
 //**@version $Id: version.php,v 1.0 2011/12/17                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
-//**@Flash programming: Guillaume Bourbonniere                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
+//**@Flash programming: Guillaume Bourbonniere, Nicolas Bretin          **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
 //************************************************************************
 //************************************************************************
 $settings->add(new admin_setting_configtext('languagelab_red5server', get_string('red5server', 'languagelab'),
                    get_string('red5server', 'languagelab'), get_string('red5config','languagelab'), PARAM_RAW));
+$settings->add(new admin_setting_configtext('nonStreamingBasePath', get_string('nonStreamingBasePath', 'languagelab'),
+                   get_string('nonStreamingBasePath_help', 'languagelab'), '', PARAM_TEXT));
+$settings->add(new admin_setting_configtext('languagelab_folder', get_string('red5folder', 'languagelab'),
+                   get_string('red5folder_help', 'languagelab'), 'moodle', PARAM_TEXT));
 $settings->add(new admin_setting_configtext('languagelab_prefix', get_string('prefix', 'languagelab'),
                    get_string('prefixhelp', 'languagelab'), 'mdl', PARAM_RAW));
 $settings->add(new admin_setting_configtext('languagelab_max_users', get_string('maxusers', 'languagelab'),
@@ -26,6 +30,12 @@ $settings->add(new admin_setting_configcheckbox('languagelab_adapter_access', ge
                    get_string('red5_adapter_access_help', 'languagelab'), '0',1,0 ));
 $settings->add(new admin_setting_configtext('languagelab_salt', get_string('salt', 'languagelab'),
                    get_string('salt_help', 'languagelab'), '', PARAM_TEXT));
+$settings->add(new admin_setting_configtext('languagelab_secondsRefreshHistory', get_string('secondsRefreshHistory', 'languagelab'),
+                   get_string('secondsRefreshHistoryhelp', 'languagelab'), '30000', PARAM_INT));
+$settings->add(new admin_setting_configtext('languagelab_secondsRefreshClassmonitor', get_string('secondsRefreshClassmonitor', 'languagelab'),
+                   get_string('secondsRefreshClassmonitorhelp', 'languagelab'), '5000', PARAM_INT));
+$settings->add(new admin_setting_configtext('languagelab_secondsRefreshStudentView', get_string('secondsRefreshStudentView', 'languagelab'),
+                   get_string('secondsRefreshStudentViewhelp', 'languagelab'), '5000', PARAM_INT));
 //ffmpeg for file conversion
 //$settings->add(new admin_setting_configexecutable('ffmpeg', get_string('ffmpeg', 'languagelab'),
  //                  get_string('ffmpeghelp','languagelab'), ''));

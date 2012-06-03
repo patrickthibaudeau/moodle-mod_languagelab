@@ -1,17 +1,18 @@
 <?php
 //************************************************************************
 //************************************************************************
-//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//**               LANGUAGE LAB Version 3 for Moodle 2                  **
 //************************************************************************
 //**@package languagelab                                                **
 //**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
-//**@version $Id: version.php,v 1.0 2011/12/17                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
-//**@Flash programming: Guillaume Bourbonniere                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
+//**@authors : Patrick Thibaudeau, Nicolas Bretin                       **
+//**@version $Id: version.php,v 1.0 2012/05/10                          **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
+//**@Flash programming: Nicolas Bretin, Guillaume Bourbonniere          **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
 //************************************************************************
 //************************************************************************
+
 defined('MOODLE_INTERNAL') || die;
 require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->libdir.'/filelib.php');
@@ -26,11 +27,23 @@ class mod_languagelab_mod_form extends moodleform_mod {
      */
 
     function definition() {
-        global $CFG, $USER, $DB;
+        global $CFG, $USER, $DB, $PAGE;
         
+	
+        $PAGE->requires->js('/mod/languagelab/js/jquery-1.7.2.min.js', true);
+        $PAGE->requires->js('/mod/languagelab/js/jquery.ui/jquery-ui-1.8.20.custom.min.js', true);
+        $PAGE->requires->js('/mod/languagelab/js/jquery.jstree/jquery.jstree.js', true);
+        $PAGE->requires->js('/mod/languagelab/js/flash_detect_min.js', true);
+        $PAGE->requires->js('/mod/languagelab/js/languagelab.js', true);
+
+        $PAGE->requires->css('/mod/languagelab/js/jquery.ui/custom-theme/jquery-ui-1.8.20.custom.css');
+        $PAGE->requires->css('/mod/languagelab/style.css');
+        
+        $newRecording = 'true';
         //flash recorder component
         if (isset($_REQUEST['update'])){
             if ($_REQUEST['update'] <> 0){
+                $newRecording = 'false';
                 $languagelab = $DB->get_record('languagelab',array('id'=>$this->current->instance));
             }
         }
@@ -38,7 +51,7 @@ class mod_languagelab_mod_form extends moodleform_mod {
         if(isset($languagelab->master_track_recording)) {
             $recordingname = $languagelab->master_track_recording;
         } else {
-            $recordingname = $CFG->languagelab_prefix.'_mastertrack_'.time();
+            $recordingname = '';
         }
 
 
@@ -53,63 +66,82 @@ class mod_languagelab_mod_form extends moodleform_mod {
                 }
         } else {
             $record_button = 'true';
+            $submitted_recordings = 0;
         }
-        $flashvars = $CFG->languagelab_red5server.','.$recordingname.','.$record_button;
-        //$key = 'LanguageLabFlashVars124956496';
-        $enc_flashvars =base64_encode($flashvars);
 
+        $idPlayer = 'playerRecorderMastertrack';
+        $filePrefix = $CFG->languagelab_folder.'/'.$CFG->languagelab_prefix.'mastertrack_';
+        
+        
+        if( $newRecording=='false' && $submitted_recordings == 0)
+        {
+            $buttonsPlayer = '<button id="loadPreviousMastertrack">'.get_string('load_prev_master', 'languagelab').'</button>';
+            $buttonsPlayer .= '<button id="newMastertrack">'.get_string('newMastertrack', 'languagelab').'</button>';
+        }
+        else
+        {
+            $buttonsPlayer = '';
+        }
+        
+        $titlePlayerOptions = get_string('titlePlayerOptions', 'languagelab');
+        $playeroptionstxt1 = get_string('playeroptionstxt1', 'languagelab');
+        $playeroptionstxt2 = get_string('playeroptionstxt2', 'languagelab', '<img src="'.$CFG->wwwroot.'/mod/languagelab/pix/privacy-ico.png"/>');
+        $playeroptionstxt3 = get_string('playeroptionstxt3', 'languagelab', '<img src="'.$CFG->wwwroot.'/mod/languagelab/pix/allow-ico.png"/>');
+        $playeroptionstxt4 = get_string('playeroptionstxt4', 'languagelab', '<img src="'.$CFG->wwwroot.'/mod/languagelab/pix/check-ico.png"/>');
+        $playeroptionstxt5 = get_string('playeroptionstxt5', 'languagelab');
+        $playeroptionstxt6 = get_string('playeroptionstxt6', 'languagelab');
+        $playeroptionsBtnOk = get_string('playeroptionsBtnOk', 'languagelab');
         //This is the Flash player required for recording the master track
         $recorder = <<<HERE
-        <script type="text/javascript"  src="$CFG->wwwroot/mod/languagelab/flash.js"></script>
-                            <script language="JavaScript" type="text/javascript">
-            AC_FL_RunContent(
-                'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
-                'width', '215',
-                'height', '138',
-                'src', '$CFG->wwwroot/mod/languagelab/flash/AudioFilter',
-                'quality', 'high',
-                'pluginspage', 'http://www.adobe.com/go/getflashplayer',
-                'align', 'middle',
-                'play', 'true',
-                'loop', 'true',
-                'scale', 'showall',
-                'wmode', 'window',
-                'devicefont', 'false',
-                'id', 'AudioFilter',
-                'bgcolor', 'D4D0C8',
-                'name', 'AudioFilter',
-                'menu', 'true',
-                'allowFullScreen', 'false',
-                'allowScriptAccess','always',
-                'allowNetworking', 'all',
-                'bgcolor', '#ffffff',
-                'flashvars','sData=$enc_flashvars',
-                'movie', '$CFG->wwwroot/mod/languagelab/flash/AudioFilter',
-                'salign', ''
-                ); //end AC code
-                /*
-                Here's what the recorder player needs in order to work.
-                To play:
-                    in flashvars:
-                        server: address of the FMS server without protocol prefix nor folder suffix
-                        sname: name of the stream to be played / recorded
-
-                To record:
-                    same as above plus:
-                        in flashVars:
-                            sRec property set to true -- DO NOT DEFINE the sRec PROPERTY UNLESS YOU WANT TO ENABLE IT. It would be way too easy to guess how to hack a teacher's recording otherwise.
-                        in other parameters:
-                            height must be set to at least 138 or else flash won't access webcam or mic
-                Let me know if you have any question.
-                */
+        
+        <div id="dialogInfo" title="">
+        </div>
+        
+        <script type="text/javascript">
+            var playerRecorders = [];
+            var playerOptions;
+            var userLiveURI;
+            var userRecordURI;
+            var rtmpserver = "rtmp://$CFG->languagelab_red5server/oflaDemo";
+            var files_prefix = "$filePrefix";
+            var newRecording = $newRecording;
+            var fileURI = "$recordingname";
+            var existingMastertrackURI = "$recordingname";
+            var playeroptionsBtnOk = "$playeroptionsBtnOk";
+            var submitted_recordings = $submitted_recordings;
         </script>
-                    <noscript>
-            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="215" height="138" id="AudioFilter" align="middle">
+        
+        <div id="divPlayerOptions" title="$titlePlayerOptions" style="position:absolute;top:-1000px;">
+            <div id="divPlayerOptionsText" style="width: 400px;">
+                $playeroptionstxt1
+                <ol>
+                    <li>$playeroptionstxt2</li>
+                    <li>$playeroptionstxt3</li>
+                    <li>$playeroptionstxt4</li>
+                    <li>$playeroptionstxt5</li>
+                    <li>$playeroptionstxt6</li>
+                </ol>
+            </div>
+            <div id="divPlayerOptionsObj" style="text-align:center;">
+                <object type="application/x-shockwave-flash" data="$CFG->wwwroot/mod/languagelab/flash/PlayerOptions.swf" width="250" height="160" name="playerOptions" id="playerOptions">
+                    <param name="allowScriptAccess" value="always" />
+                    <param name="allowFullScreen" value="true" />
+                    <param name="wmode" value="window">
+                    <param name="movie" value="$CFG->wwwroot/mod/languagelab/flash/PlayerOptions.swf" />
+                    <param name="quality" value="high" />
+                </object>
+            </div>
+            <div style="clear:both;"></div>
+        </div>               
+        
+        <object type="application/x-shockwave-flash" data="$CFG->wwwroot/mod/languagelab/flash/PlayerRecorder.swf?idHTML=$idPlayer" width="350" height="45" name="$idPlayer" id="$idPlayer" style="outline: none;" >
+            <param name="movie" value="$CFG->wwwroot/mod/languagelab/flash/PlayerRecorder.swf" />
             <param name="allowScriptAccess" value="always" />
-            <param name="allowFullScreen" value="false" />
-            <param name="movie" value="$CFG->wwwroot/mod/languagelab/flash/';?>AudioFilter.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	<embed src="$CFG->wwwroot/mod/languagelab/flash/AudioFilter.swf" quality="high" bgcolor="#ffffff" width="215" height="24" name="AudioFilter" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
-            </object>
-        </noscript>
+            <param name="allowFullScreen" value="true" />
+            <param name="wmode" value="transparent"/> 
+            <param name="quality" value="high" />
+        </object>
+        $buttonsPlayer
 HERE;
         
 	$editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES);
@@ -121,6 +153,7 @@ HERE;
         $mform->addRule('name', null, 'required', null, 'client');
 
         $mform->addElement('editor', 'content', get_string('description', 'languagelab'),null, $editoroptions);
+        $mform->addElement('static','txt','','<div id="descrLabLang"></div>');
         $mform->addElement('static','master_track_recorder',get_string('master_track_recorder','languagelab'),$recorder);
         $mform->addHelpButton('master_track_recorder', 'master_track_recorder', 'languagelab');
         //This actual file name
@@ -148,9 +181,12 @@ HERE;
         $ynoptions = array( 0 => get_string('no'), 1 => get_string('yes'));
 
         $mform->addElement('header','general',get_string('advanced','languagelab'));
-        $mform->addElement('checkbox','video',get_string('use_video','languagelab'));
-        $mform->addHelpButton('video', 'video', 'languagelab');
-        $mform->setDefault('video', false);
+        //$mform->addElement('checkbox','video',get_string('use_video','languagelab'));
+        //$mform->addHelpButton('video', 'video', 'languagelab');
+        //$mform->setDefault('video', false);
+        
+        $mform->addElement('static','video_disabled','Video not available for now. Please check for new version soon...');
+        
         //$mform->addElement('select', 'group_type', get_string('group_type','languagelab'), array(0 => get_string('select_group_type','languagelab') , 1 => get_string('async','languagelab') , 2 => get_string('dialogue','languagelab')));
         //$mform->addHelpButton('group_type', 'group_type', 'languagelab');
         $mform->addElement('checkbox','use_grade_book',get_string('use_grade_book','languagelab'));

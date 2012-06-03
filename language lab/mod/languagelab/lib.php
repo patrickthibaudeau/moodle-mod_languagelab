@@ -1,18 +1,17 @@
 <?php
 //************************************************************************
 //************************************************************************
-//**               LANGUAGE LAB Version 2 for Moodle 2                  **
+//**               LANGUAGE LAB Version 3 for Moodle 2                  **
 //************************************************************************
 //**@package languagelab                                                **
 //**@Institution: oohoo.biz, Campus Saint-Jean, University of Alberta   **
-//**@authors : Patrick Thibaudeau, Guillaume Bourbonniere               **
-//**@version $Id: version.php,v 1.0 2011/12/17                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
-//**@Flash programming: Guillaume Bourbonniere                          **
-//**@Moodle integration: Patrick Thibaudeau                             **
+//**@authors : Patrick Thibaudeau, Nicolas Bretin                       **
+//**@version $Id: version.php,v 1.0 2012/05/10                          **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
+//**@Flash programming: Nicolas Bretin                                  **
+//**@Moodle integration: Patrick Thibaudeau, Nicolas Bretin             **
 //************************************************************************
 //************************************************************************
-
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -82,14 +81,19 @@ function languagelab_add_instance($languagelab, $mform=null) {
     if ($mform) {
             $filename = $mform->get_new_filename('master_track');
             if ($filename !== false) {
-                $scorm->reference = $filename;
-                $fs = get_file_storage();
-                $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
-                $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
-                $languagelab->master_track = $filename;
-                $languagelab->use_mp3 = 1;
+                $data = $mform->get_file_content('master_track');
+                    
+                $filename = $CFG->languagelab_folder.'/'.$CFG->languagelab_prefix.'mastertrack_'.  rand(10000000, 99999999);
+                languagelab_upload_mp3_file($data, $filename.'.mp3');
+
+                $languagelab->master_track = 'mp3:'.$filename;
+                $languagelab->master_track_recording = $languagelab->master_track;
 
             } else {
+                if(languagelab_convert_mp3_recording($languagelab->master_track_recording) == 1)
+                {
+                    $languagelab->master_track_recording = 'mp3:'.$languagelab->master_track_recording;
+                }
                 $languagelab->master_track = $languagelab->master_track_recording;
             }
         }
@@ -98,7 +102,7 @@ function languagelab_add_instance($languagelab, $mform=null) {
     $languagelab->id = $DB->insert_record("languagelab", $languagelab);
     
     //only use grade book when checked
-    if ($languagelab->use_grade_book ==  true) {
+    if (isset($languagelab->use_grade_book)) {
         languagelab_grade_item_update($languagelab);
     }
         // we need to use context now, so we need to make sure all needed info is already in db
@@ -143,21 +147,29 @@ function languagelab_update_instance($languagelab, $mform=null) {
     //Uploaded file
     if ($languagelab->submitted_recordings == 0) {
         if ($mform) {
-                $filename = $mform->get_new_filename('master_track');            
+                $filename = $mform->get_new_filename('master_track');  
                 if ($filename !== false) {
-                    $scorm->reference = $filename;
-                    $fs = get_file_storage();
-                    $fs->delete_area_files($context->id, 'mod_languagelab', 'mastertrack');
-                    $mform->save_stored_file('master_track', $context->id, 'mod_languagelab', 'mastertrack', 0, '/', $filename);
-                    $languagelab->master_track = $filename;
-                    $languagelab->use_mp3 = 1;
                     
-
+                    $data = $mform->get_file_content('master_track');
+                    
+                    $filename = $CFG->languagelab_folder.'/'.$CFG->languagelab_prefix.'mastertrack_'.  rand(10000000, 99999999);
+                    languagelab_upload_mp3_file($data, $filename.'.mp3');
+                    
+                    $languagelab->master_track = 'mp3:'.$filename;
+                    $languagelab->master_track_recording = $languagelab->master_track;
+                    
                 } else {
                   
                     if ($languagelab->use_mp3 == true){
                         $languagelab->master_track = $languagelab->master_track_used;
                     } else {
+                        if(strpos($languagelab->master_track_recording, 'mp3:') === false)
+                        {
+                            if(languagelab_convert_mp3_recording($languagelab->master_track_recording) == 1)
+                            {
+                                $languagelab->master_track_recording = 'mp3:'.$languagelab->master_track_recording;
+                            }
+                        }
                         $languagelab->master_track = $languagelab->master_track_recording;
                     }
                 }
@@ -167,7 +179,7 @@ function languagelab_update_instance($languagelab, $mform=null) {
     $temp = $DB->update_record("languagelab", $languagelab);
 
     //only use grade book when checked
-    if ($languagelab->use_grade_book ==  true) {
+    if (isset($languagelab->use_grade_book) && $languagelab->use_grade_book ==  true) {
     // update grade item definition
     languagelab_grade_item_update($languagelab);
 
@@ -560,6 +572,27 @@ function languagelab_pluginfile($course, $cm, $context, $filearea, $args, $force
 //////////////////////////////////////////////////////////////////////////////////////
 /// Any other languagelab functions go here.  Each of them must have a name that 
 /// starts with languagelab_
+
+
+/**
+ * Convert the file from FLV to MP3
+ * @param type $filePath the file path on the server
+ */
+function languagelab_convert_mp3_recording($filePath){
+    
+    require_once('locallib.php');
+    return convert_mp3_recording($filePath);
+} 
+
+/**
+ * Send a mp3 file to the RED5 server
+ * @param type $filedata The mp3 data
+ */
+function languagelab_upload_mp3_file($filedata, $pathOnServer){
+    
+    require_once('locallib.php');
+    return upload_mp3_file($filedata, $pathOnServer);
+} 
 
 
 ?>

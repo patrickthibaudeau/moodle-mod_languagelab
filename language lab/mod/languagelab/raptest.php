@@ -1,6 +1,22 @@
 <?php
 include('../../config.php');
 include('locallib.php');
+
+
+require_login(1, false);
+
+global $CFG, $PAGE, $OUTPUT;
+$context = get_context_instance(CONTEXT_SYSTEM);
+
+$PAGE->set_url('/mod/languagelab/raptest.php', array('id' => 1));
+$PAGE->set_title('RAP test');
+$PAGE->set_heading('RAP test');
+$PAGE->set_context($context);
+
+if (has_capability('mod/languagelab:manage', $context, null, true)) {
+
+echo $OUTPUT->header();
+
 //Is the Red5 Adapter Plugin set
     if (isset($CFG->languagelab_adapter_file)) {
         //Let's delete all files on the Red5 Server
@@ -34,5 +50,10 @@ include('locallib.php');
 
         $result = curl_exec($ch);
     }
-    
+	echo $OUTPUT->footer();
+} else {
+	
+	redirect($CFG->wwwroot, get_string('norappermission','mod_languagelab'), 5);
+}
+
 ?>

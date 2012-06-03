@@ -1,4 +1,4 @@
-﻿<?php  //$Id: upgrade.php,v 1.1.8.1 2008/05/01 20:51:20 skodak Exp $
+<?php  //$Id: upgrade.php,v 1.1.8.1 2008/05/01 20:51:20 skodak Exp $
 
 // This file keeps track of upgrades to 
 // the label module
@@ -201,7 +201,127 @@ function xmldb_languagelab_upgrade($oldversion=0) {
         // languagelab savepoint reached
         upgrade_mod_savepoint(true, 2011121701, 'languagelab');
     }
+    if ($oldversion < 2012030800) {
 
+        //Added scrubbing feature
+        //New nonStreamingBasePath Config
+        
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012030800, 'languagelab');
+    }
+    if ($oldversion < 2012031200) {
+
+        //Added RAP security for testing. Must also create manage capability 
+        
+        $capabilities = array(
+
+	'mod/languagelab:manage' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'teacher' => CAP_PREVENT,
+	    'student' => CAP_PREVENT,
+            'editingteacher' => CAP_PREVENT,
+            'manager' => CAP_ALLOW
+            )
+        ),
+
+    );
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012031200, 'languagelab');
+    }
+    
+    if ($oldversion < 2012031201) {
+
+        // Changing the default of field grade on table languagelab_student_eval to drop it
+        $table = new xmldb_table('languagelab_student_eval');
+        $field = new xmldb_field('grade', XMLDB_TYPE_INTEGER, '11', null, null, null, null, 'correctionnotes');
+
+        // Launch change of default for field grade
+        $dbman->change_field_default($table, $field);
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012031201, 'languagelab');
+    }
+    
+        if ($oldversion < 2012051800) {
+
+        // Define table languagelab_user_live to be created
+        $table = new xmldb_table('languagelab_user_live');
+
+        // Adding fields to table languagelab_user_live
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('languagelab', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null);
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null);
+        $table->add_field('live', XMLDB_TYPE_TEXT, 'small', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table languagelab_user_live
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for languagelab_user_live
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012051800, 'languagelab');
+    }
+    
+    if ($oldversion < 2012051801) {
+
+        // Define field timemodified to be added to languagelab_user_live
+        $table = new xmldb_table('languagelab_user_live');
+        $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '20', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, 'live');
+
+        // Conditionally launch add field timemodified
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012051801, 'languagelab');
+    }
+
+    if ($oldversion < 2012051802) {
+
+        // Define table languagelab_user_event to be created
+        $table = new xmldb_table('languagelab_user_event');
+
+        // Adding fields to table languagelab_user_event
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('languagelab', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null);
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null);
+        $table->add_field('type', XMLDB_TYPE_TEXT, 'small', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('data', XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table languagelab_user_event
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->add_key('languagelab_ix', XMLDB_KEY_FOREIGN, array('languagelab'), 'languagelab', array('id'));
+
+        // Conditionally launch create table for languagelab_user_event
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012051802, 'languagelab');
+    }
+
+   if ($oldversion < 2012052200) {
+
+        // Changing type of field type on table languagelab_user_event to char
+        $table = new xmldb_table('languagelab_user_event');
+        $field = new xmldb_field('type', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL, null, null, 'userid');
+
+        // Launch change of type for field type
+        $dbman->change_field_type($table, $field);
+
+        // languagelab savepoint reached
+        upgrade_mod_savepoint(true, 2012052200, 'languagelab');
+    }
 
  return;
 

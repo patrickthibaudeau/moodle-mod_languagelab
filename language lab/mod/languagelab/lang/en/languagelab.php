@@ -95,6 +95,9 @@ $string['submitChanges'] = 'Submit changes';
 $string['submitGrade'] = 'Submit grade.';
 $string['agoBefore'] = '';
 $string['agoAfter'] = 'ago';
+$string['years'] = 'years';
+$string['months'] = 'months';
+$string['weeks'] = 'weeks';
 $string['days'] = 'days';
 $string['hours'] = 'hours';
 $string['minutes'] = 'minutes';
@@ -103,6 +106,12 @@ $string['grading'] = 'Grading';
 $string['grade'] = 'Grade';
 $string['startOver'] = 'Require student to start over';
 $string['corrNotes'] = 'Enter correction notes here';
+$string['recordings'] = 'Recordings';
+$string['notesCorrection'] = 'Notes & Correction';
+$string['enableGradebook'] = 'Enable gradebook integration to access grading interface';
+$string['feedback'] = 'Feedback';
+$string['privateNotes'] = 'Private Notes';
+
 
 $string['monday'] = 'Mon';
 $string['tuesday'] = 'Tues';
@@ -137,6 +146,7 @@ $string['maxusershelp'] = 'Maximum number of users that can use the language lab
 
 $string['languagelab:studentview'] = 'Language lab: Student view.';
 $string['languagelab:teacherview'] = 'Language lab: Teacher view.';
+$string['languagelab:manage'] = 'Language lab: Manager.';
 $string['select_group_type'] = 'Select group type';
 
 
@@ -151,5 +161,101 @@ $string["use_grade_book_help"] = 'By default, no grading will be given for langu
 $string["video"] = 'Allowing video.';
 $string["video_help"] = 'Check this box if you would like your students to use video and audio while recording. This can be helpful, for example, for sign language.';
 
+$string["nonStreamingBasePath"] = 'HTTP Path to audio/video files.';
+$string["nonStreamingBasePath_help"] = 'This is a path to the actual audio/video files through http. This is required for improved scrubbing. You can leave this blank if you do not have this path.';
+$string["norappermission"] = "You do not have the required permissions to view this page.";
+
+
+
+
+
+$string['cancel'] = 'Cancel';
+$string['classMonitor'] = 'Class Monitor';
+$string['classMonitor_help'] = 'Click here to access to the class monitor';
+$string['confirmDeleteHistory'] = 'Are you sure you want to delete recording ';
+$string['connectClient'] = 'Connecting...';
+$string['connected_student'] = 'You are now connected with the student. Click on the button Close to finish the discussion';
+$string['connected_student_btnStop'] = 'Close';
+$string['connected_student_title'] = 'Connected with a student';
+$string['connected_class'] = 'You are now connected with the class. Click on the button Close to finish the discussion';
+$string['connected_class_btnStop'] = 'Close';
+$string['connected_class_title'] = 'Connected with the class';
+$string['connected_no_student_connected'] = 'No student connected';
+$string['connected_error'] = 'Connection error';
+$string['connectiongServer'] = 'Connecting to server...';
+$string['defaultTitleNewRecording'] = 'New Recording';
+$string['deleteRecord'] = 'Delete';
+$string['deleteRecord_help'] = 'Select a record and click to delete it';
+$string['disconnectClient'] = 'Disconnecting...';
+$string['downloadRecord'] = 'Download MP3';
+$string['downloadRecord_help'] = 'Click to download Recording as MP3';
+$string['error_activity_not_available'] = 'This activity is no longer available to create a new recording';
+$string['error_activity_not_available_delete'] = 'This activity is no longer available, deletion not possible';
+$string['error_cannot_connect_student'] = 'Cannot connect to the student';
+$string['error_delete_notexists'] = 'This record was not found, deletion not completed';
+$string['error_delete_permission'] = 'You don\'t have the permission to delete this record';
+$string['error_grade_notsaved'] = 'An error has occured during the saving of the grade. Grade not saved.';
+$string['error_grade_permission'] = 'You don\'t have the permission to grade a student';
+$string['error_grade_user_notexists'] = 'This user not exists for this activity. Grade not saved';
+$string['error_insert_feedback_parent_notexists'] = 'The student recording don\'t exists, the feedback canno\'t be inserted';
+$string['error_insert_feedback_permission'] = 'You don\'t have the permission to create a feedback';
+$string['error_record_save'] = 'An error has occured, recording not saved';
+$string['error_user_max_attempts'] = 'You can\'t create anymore recordings. You have to delete one recording in order to create a new one';
+$string['errorTitle'] = 'Error';
+$string['filterStudents'] = 'Students filter: ';
+$string['filterStudents_help'] = 'Type student\'s name to display only this student';
+$string['gradeStudentWithRecordings'] = 'Only students with at least one recording can be graded';
+$string['listened'] = 'Your teacher listen you right now';
+$string['listRecordings'] = 'Recordings';
+$string['listRecordings_help'] = 'Click here to open the recordings in a pop-up';
+$string['load_prev_master'] = 'Revert to previous mastertrack';
+$string['micConfig'] = 'Configuration';
+$string['newRecording'] = 'New Recording';
+$string['newMastertrack'] = 'New Mastertrack';
+$string['playeroptionsBtnOk'] = 'Ok';
+$string['playeroptionstxt1'] = 'In order to use the Language Lab, you need to authorize access to your microphone. To do so:';
+$string['playeroptionstxt2'] = 'On the tab "{$a} Privacy"';
+$string['playeroptionstxt3'] = 'Select "{$a} Allow"';
+$string['playeroptionstxt4'] = 'Check the {$a} box next to Remember';
+$string['playeroptionstxt5'] = 'Click on Close';
+$string['playeroptionstxt6'] = 'Click on OK at the bottom of the window to save your changes.';
+$string['raiseHand'] = 'Raise hand';
+$string['raiseHand_help'] = 'Click here to raise your hand to your teacher';
+$string['recordingsHistory'] = 'Recordings';
+$string['recordingRequired'] = 'You have to record before submit';
+$string['recordingTitle'] = 'Title';
+$string['red5folder'] = 'The name of the folder on the red5 server where are saved the files';
+$string['red5folder_help'] = 'Type the name of the folder where are saved files for THIS moodle.';
+$string['reFeedBack'] = 'Re: ';
+$string['refresh'] = 'Refresh History';
+$string['search'] = 'Search: ';
+$string['secondsRefreshClassmonitor'] = 'Nb of microseconds before the next auto class monitor refresh';
+$string['secondsRefreshClassmonitorhelp'] = 'Type the number of microseconds to auto refresh the students list in the class monitor.';
+$string['secondsRefreshHistory'] = 'Nb of microseconds before the next auto history refresh';
+$string['secondsRefreshHistoryhelp'] = 'Type the number of microseconds to auto refresh the recordings.';
+$string['secondsRefreshStudentView'] = 'Nb of microseconds before the next auto refresh for students';
+$string['secondsRefreshStudentViewhelp'] = 'Type the number of microseconds to auto refresh the student view. Used for the live';
+$string['speakToClass'] = 'Speak to class';
+$string['speakToClasshelp'] = 'Allow you to speak in live to all online students';
+$string['stealth'] = 'Stealth';
+$string['stealthActive'] = 'Currently Active';
+$string['stealthInactive'] = 'Currently Inactive';
+$string['studentsOnline'] = 'Students online';
+$string['studentsOffline'] = 'Students offline';
+$string['submitGrade'] = 'Submit';
+$string['submitGrade_help'] = 'Click to submit the student grade';
+$string['submitRecord'] = 'Submit';
+$string['submitRecord_help'] = 'Click to submit your record';
+$string['talkToStudent_help'] = 'Click here to talk to this student';
+$string['titleConfirm'] = 'Confirmation';
+$string['teacher_class_speak'] = '<div class="dialogTeacherPic">{$a}</div> <br />talk to the class';
+$string['teacher_class_speak_title'] = 'The teacher speak to the class';
+$string['teacher_student_speak'] = '<div class="dialogTeacherPic">{$a}</div> <br />has started a discussion with you. You are now connected.';
+$string['teacher_student_speak_title'] = 'Discussion with a teacher';
+$string['titlePlayerOptions'] = 'Microphone options';
+$string['titleRecording'] = 'Recording';
+$string['titleStudentRecording'] = 'Student Recording';
+$string['thumbsup_student'] = 'Good Job!';
+$string['thumbsUp_help'] = 'Clic here to send a &quot;Thumbs Up&quot; to this student';
 
 ?>

@@ -27,6 +27,17 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
+	
+	'mod/languagelab:manage' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'teacher' => CAP_PREVENT,
+			'student' => CAP_PREVENT,
+            'editingteacher' => CAP_PREVENT,
+            'manager' => CAP_ALLOW
+        )
+    ),
 
 );
 ?>

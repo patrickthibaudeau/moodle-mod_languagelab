@@ -1,6 +1,6 @@
 LANGUAGE LAB
 
-This module is an audio recording module to replace traditional language labs. It's goal is to offer a high quality system that is affordable.
+This module is an audio recording module to replace traditional language labs. The goal is to offer a high quality system that is affordable.
 
 -------------------------------
 Prerequisites
