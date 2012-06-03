@@ -8,8 +8,8 @@ $(function(){
     
     if(FlashDetect.major == flashMajor && FlashDetect.minor == flashMinor && (FlashDetect.revision >= flashRevisionMin && FlashDetect.revision <= flashRevisionMax))
     {
-        var text = elem.html() +'<b style="color:red;">Your Flash version is not entirely functional with the Language Lab. You will not be able to listen your recording while you have not submit it. Please download an other version of flash.<br /><br />';
-        text = text + 'Click <a href="flash/fp_11.1.102.62_archive.zip">here</a> to download a compatible version of flash</b></br></br>';
+        var text = elem.html() +'<b style="color:red;">Your Flash version is not entirely functional with the Language Lab. You will not be able to listen to your recording prior to you submitting it. Please download an other version of flash.<br /><br />';
+        text = text + 'Click <a href="http://oohoo.biz/flash/fp_11.1.102.62_archive.zip">here</a> to download a compatible version of flash</b></br></br>';
         $(elem).html(text);
     }
 });
