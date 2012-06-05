@@ -14,7 +14,7 @@
 //************************************************************************
 
 $module->version  = 2012060300;  // The current module version (Date: YYYYMMDDXX)
-$module->requires = 2010112400;
+$module->requires = 2011120100;
 $module->maturity = MATURITY_RC;
 $module->release = '3.0.0 (Build: 2012060300)';
 $module->cron     = 0;           // Period for cron to check this module (secs)
